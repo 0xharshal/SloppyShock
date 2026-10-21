@@ -9,7 +9,7 @@ See README.md for build commands and layout.
 ## Ground rules
 
 - **Never edit generated files by hand**: `watchface/src/*/res/raw/watchface.xml`,
-  `watchface/src/*/res/values/strings.xml`, `res/font/lcd_segments.ttf`,
+  `watchface/src/*/res/values/strings.xml`, `res/font/lcd_segments*.ttf`,
   `res/drawable-nodpi/lcd_digit_*.png`. Edit `tools/gen_watchface.py` /
   `tools/gen_segment_font.py` and rerun them, then rebuild.
 - Every WFF quirk below was found on real hardware; the emulator does not
@@ -109,6 +109,11 @@ the user must re-seat the watch.
   on the emulator.
 
 ## Layout
+
+Fonts: `lcd_segments` (wide, 0.765 em/char) for time, date and ghosts;
+`lcd_segments_narrow` (0.545 em/char) for complication text, which providers
+make long ("MEDIA CONTROLS", "MUMBAI 14:07"); always end slot text with
+`ellipsis="TRUE"`. Font files are reproducible (fixed head timestamps).
 
 All coordinates are in a 450×450 design space scaled about the centre by
 `K = (PANEL_R - 7) / 177` (`pos()`, `sz()`, `box()`), so changing `PANEL_R`

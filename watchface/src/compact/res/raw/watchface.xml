@@ -792,7 +792,7 @@
                 </PartImage>
                 
                 <PartText x="30" y="6" width="124" height="22">
-                    <Text align="START"><Font family="lcd_segments" size="22" color="#EEF3EC">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="22" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -803,7 +803,7 @@
                 </PartImage>
                 
                 <PartText x="30" y="6" width="124" height="22">
-                    <Text align="START"><Font family="lcd_segments" size="22" color="#EEF3EC">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="22" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -836,7 +836,7 @@
                 </PartImage>
                 
                 <PartText x="30" y="6" width="124" height="22">
-                    <Text align="START"><Font family="lcd_segments" size="22" color="#EEF3EC">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="22" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -847,7 +847,7 @@
                 </PartImage>
                 
                 <PartText x="30" y="6" width="124" height="22">
-                    <Text align="START"><Font family="lcd_segments" size="22" color="#EEF3EC">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="22" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -884,7 +884,7 @@
                     </Font></Text>
                 </PartText>
                 <PartText x="32" y="17" width="122" height="24">
-                    <Text align="START"><Font family="lcd_segments" size="24" color="#EEF3EC">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="24" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -899,7 +899,7 @@
                     </Font></Text>
                 </PartText>
                 <PartText x="32" y="17" width="122" height="24">
-                    <Text align="START"><Font family="lcd_segments" size="24" color="#EEF3EC">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="24" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -936,7 +936,7 @@
                     </Font></Text>
                 </PartText>
                 <PartText x="32" y="17" width="122" height="24">
-                    <Text align="START"><Font family="lcd_segments" size="24" color="#EEF3EC">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="24" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -951,7 +951,7 @@
                     </Font></Text>
                 </PartText>
                 <PartText x="32" y="17" width="122" height="24">
-                    <Text align="START"><Font family="lcd_segments" size="24" color="#EEF3EC">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="24" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -984,7 +984,7 @@
                 </PartImage>
                 
                 <PartText x="30" y="6" width="158" height="22">
-                    <Text align="START"><Font family="lcd_segments" size="22" color="#EEF3EC">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="22" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -995,7 +995,7 @@
                 </PartImage>
                 
                 <PartText x="30" y="6" width="158" height="22">
-                    <Text align="START"><Font family="lcd_segments" size="22" color="#EEF3EC">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="22" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -1006,7 +1006,7 @@
                 </PartImage>
                 
                 <PartText x="30" y="6" width="158" height="22">
-                    <Text align="START"><Font family="lcd_segments" size="22" color="#EEF3EC">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="22" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>

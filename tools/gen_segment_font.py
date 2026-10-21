@@ -145,7 +145,26 @@ def draw(polys, x_offset):
     return pen.glyph()
 
 
+# Font variants: (file name, family, body width, thickness, inner thickness, side bearing).
+# "narrow" fits ~40% more characters; used for complication text.
+VARIANTS = [
+    ("lcd_segments", "Segment7", 520, 110, 66, 70),
+    ("lcd_segments_narrow", "Segment7 Narrow", 360, 96, 56, 40),
+]
+
+
 def main():
+    for name, family, w, t, ti, side in VARIANTS:
+        path = build_font(name, family, w, t, ti, side)
+        if name == "lcd_segments":
+            render_digit_pngs(path)
+
+
+def build_font(file_name, family, w, t, ti, side):
+    """Builds one variant; the glyph helpers read these module-level proportions."""
+    global W, T, TI, SIDE, ADVANCE
+    W, T, TI, SIDE = w, t, ti, side
+    ADVANCE = int(W + H * SLANT + 2 * SIDE)
     segs = segment_polys()
     segs14 = segment14_polys()
     glyphs, metrics, cmap = {}, {}, {}
@@ -180,16 +199,18 @@ def main():
     lsb = {n: glyphs[n].xMin if hasattr(glyphs[n], "xMin") else 0 for n in glyphs}
     fb.setupHorizontalMetrics({n: (metrics[n][0], lsb[n]) for n in glyphs})
     fb.setupHorizontalHeader(ascent=H, descent=0)
-    fb.setupNameTable({"familyName": "Segment7", "styleName": "Regular"})
+    fb.setupNameTable({"familyName": family, "styleName": "Regular"})
     fb.setupOS2(sTypoAscender=H, sTypoDescender=0, sTypoLineGap=0,
                 usWinAscent=H, usWinDescent=0, sCapHeight=H, sxHeight=H)
     fb.setupPost()
+    # Fixed timestamps: identical glyphs give an identical file (no churn).
+    fb.updateHead(created=0x80000000, modified=0x80000000)
 
-    out = os.path.join(os.path.dirname(__file__), "..", "watchface", "src", "main",
-                       "res", "font", "lcd_segments.ttf")
-    fb.save(os.path.normpath(out))
-    print("wrote", os.path.normpath(out))
-    render_digit_pngs(os.path.normpath(out))
+    out = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "watchface", "src",
+                                        "main", "res", "font", f"{file_name}.ttf"))
+    fb.save(out)
+    print(f"wrote {out} (advance {ADVANCE / UPM:.3f} em)")
+    return out
 
 
 def digit_png_width():

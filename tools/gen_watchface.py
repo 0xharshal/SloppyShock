@@ -331,7 +331,8 @@ def complication_slot(slot_id, rect, provider, ptype, kind):
     title_size = sz(13 if large else 10)
     # Large panel: one line, small enough for ~20 chars ("11:00: COFFEE CHAT").
     # (maxLines="2" is accepted but doesn't wrap on the Galaxy runtime.)
-    text_size = sz((19 if w > sz(200) else 16) if large else 22 if tall else 20)
+    # Complication text uses the narrow segment font (fits ~40% more chars).
+    text_size = sz((22 if w > sz(200) else 20) if large else 22 if tall else 20)
     if large:
         # icon + title row, then the value on up to two full-width lines
         icon_x, icon_y = pad, sz(7)
@@ -353,9 +354,9 @@ def complication_slot(slot_id, rect, provider, ptype, kind):
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>''' if tall else ""
-    clip = ' ellipsis="TRUE"' if large else ""
+    clip = ' ellipsis="TRUE"'
     text = f'''<PartText x="{text_x}" y="{text_y}" width="{text_w}" height="{text_size}">
-                    <Text align="START"{clip}><Font family="lcd_segments" size="{text_size}" color="{LCD}">
+                    <Text align="START"{clip}><Font family="lcd_segments_narrow" size="{text_size}" color="{LCD}">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>'''

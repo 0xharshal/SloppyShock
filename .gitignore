@@ -18,3 +18,4 @@ __pycache__/
 /.idea/deviceManager.xml
 *.jks
 *.keystore
+*.b64
