@@ -9,7 +9,6 @@
     <string name="slot_1">Right complication</string>
     <string name="slot_4">Bottom complication</string>
     <string name="slot_ring">Ring</string>
-    <string name="slot_pointer">Ring marker (yellow)</string>
     <string name="tap_time">Tap on time</string>
     <string name="tap_date">Tap on date</string>
 </resources>

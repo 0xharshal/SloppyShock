@@ -145,12 +145,17 @@ SLOTS_DUAL = [
 
 # Build flavors: one watch face (and APK) per layout. compact keeps the
 # original package name so existing installs keep their settings.
+# (face name, slots, has ring marker). WFF allows at most 8 ComplicationSlots
+# per face (schema maxOccurs, enforced by the Watch Face Push validator); compact
+# has 5 small + ring + 2 tap areas, so it goes without the ring marker.
+MAX_SLOTS = 8
 VARIANTS = {
-    "compact": ("SloppyShock", SLOTS_COMPACT),
-    "detailed": ("SloppyShock Detailed", SLOTS_DETAILED),
-    "dual": ("SloppyShock Dual", SLOTS_DUAL),
+    "compact": ("SloppyShock", SLOTS_COMPACT, False),
+    "detailed": ("SloppyShock Detailed", SLOTS_DETAILED, True),
+    "dual": ("SloppyShock Dual", SLOTS_DUAL, True),
 }
 SLOTS = SLOTS_COMPACT                     # the variant being generated
+HAS_POINTER = False
 SLOT_NAMES = {3: "Upper left", 6: "Upper right", 0: "Left", 1: "Right", 4: "Bottom", 10: "Detail panel",
               11: "Left detail panel", 12: "Right detail panel"}
 
@@ -552,7 +557,7 @@ def build():
             {ring_options()}
             </ListConfiguration>
         </Group>
-        {pointer_slot()}
+        {pointer_slot() if HAS_POINTER else ""}
 
         <!-- Quarter markers on the ring -->
         <PartDraw x="0" y="0" width="{SIZE}" height="{SIZE}" name="quarter_marks">
@@ -634,15 +639,18 @@ def strings(face_name):
     lines += [f'    <string name="ring_{rid}">{name}</string>' for rid, name in RING_MODES]
     lines += [f'    <string name="slot_{sid}">{SLOT_NAMES[sid]} complication</string>' for sid, *_ in SLOTS]
     lines += ['    <string name="slot_ring">Ring</string>',
-              '    <string name="slot_pointer">Ring marker (yellow)</string>']
+              ] + (['    <string name="slot_pointer">Ring marker (yellow)</string>'] if HAS_POINTER else [])
     lines += [f'    <string name="{name}">{label}</string>' for _, name, label, *_ in TAP_AREAS]
     return "\n".join(lines + ['</resources>', ''])
 
 
 if __name__ == "__main__":
     check_digit_pngs()
-    for variant, (face_name, variant_slots) in VARIANTS.items():
+    for variant, (face_name, variant_slots, HAS_POINTER) in VARIANTS.items():
         SLOTS = variant_slots
+        count = len(SLOTS) + len(TAP_AREAS) + 1 + HAS_POINTER   # + ring (+ marker)
+        if count > MAX_SLOTS:
+            raise SystemExit(f"{variant}: {count} complication slots, WFF allows {MAX_SLOTS}")
         res = os.path.join(SRC, variant, "res")
         for sub in ("raw", "values"):
             os.makedirs(os.path.join(res, sub), exist_ok=True)
