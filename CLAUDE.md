@@ -42,7 +42,10 @@ See README.md for build commands and layout.
   8 `ComplicationSlot`s per face; the generator checks this. To see all schema
   errors, validate the XML against `docs.zip` inside the validator jar.
 - Samsung allows **one** pushed face per app (`remainingSlotCount` 0 after the
-  default face), so `Faces.use()` replaces the face in that slot.
+  default face), so `Faces.use()` replaces the face in that slot. Replacing it
+  with a *different* face resets the user's complication choices; updating the
+  *same* face (higher versionCode) keeps them. When testing on the user's
+  watch, only update the face they use; don't switch away and back.
 - Debug builds accept `am start -S -n dev.stackon.sloppyshock/.MainActivity
   --es use <face>` (or `--es remove <face>`) and log the result plus the slot
   state under tag `SloppyShock`; keep the screen awake while it runs (frozen
@@ -120,7 +123,8 @@ the user must re-seat the watch.
 ## Layout
 
 Fonts: `lcd_segments` (0.765 em/char) for time, date and ghosts only;
-complication text uses the system font (`SYNC_TO_DEVICE`). Single-line slot
+complication text uses the built-in `monospace` family (Droid Sans Mono,
+0.6 em/char; `serif-monospace` is not resolved on Samsung). Single-line slot
 text ends with `ellipsis="TRUE"`. Font files are reproducible (fixed head
 timestamps).
 

@@ -69,7 +69,8 @@ adb install SloppyShock-<version>.apk
 - Installing the app also installs the **SloppyShock** face. Long-press the
   watch face and pick it, or open the **SloppyShock** app and tap **Use**.
 - Switch layouts in the app (Wear OS allows one face per app, so **Use**
-  replaces the current SloppyShock face). Allow the "watch face" permission
+  replaces the current SloppyShock face). Switching resets that face's
+  complication choices; app updates keep them. Allow the "watch face" permission
   when asked so the app can activate faces itself.
 - Customize as usual: long-press the face → edit. **Ring** chooses complication
   or seconds; the complications page has all slots plus **Tap on time** /

@@ -184,14 +184,6 @@ def seg_text(x, y, w, size, text=None, template=None, color=LCD, align="END"):
             </PartText>'''
 
 
-def label(x, y, w, h, size, text, color, align="START"):
-    return f'''<PartText x="{x}" y="{y}" width="{w}" height="{h}">
-                <Text align="{align}">
-                    <Font family="SYNC_TO_DEVICE" size="{size}" color="{color}" weight="BOLD"><![CDATA[{text}]]></Font>
-                </Text>
-            </PartText>'''
-
-
 def ring_gaps():
     r0, r1 = RING_R - RING_W / 2 - 1, RING_R + RING_W / 2 + 1
     lines = []
@@ -317,8 +309,11 @@ def ring_options():
             </ListOption>'''
 
 
-# System font: average character advance, used to decide how much text fits.
-CHAR_EM = 0.58
+# Complication text font: Android's built-in monospace (Droid Sans Mono on
+# Samsung; "serif-monospace"/"courier" are not resolved by the runtime).
+# Every character, bold included, advances 0.6 em, so fits are exact.
+COMPLICATION_FONT = "monospace"
+CHAR_EM = 0.6
 
 
 def fitted_text(source, x, w, normal, big, y_normal, y_big, color, lines=1, bold=False):
@@ -326,7 +321,7 @@ def fitted_text(source, x, w, normal, big, y_normal, y_big, color, lines=1, bold
     one by length: text that fits on one line at the `big` size gets it, longer
     text uses the `normal` size (wrapped over `lines` lines, else ellipsized)."""
     weight = ' weight="BOLD"' if bold else ""
-    max_big = int(w / ((CHAR_EM + (0.04 if bold else 0)) * big))
+    max_big = int(w / (CHAR_EM * big))
     short = f"textLength({source}) &lt;= {max_big}"
     wrap = f' maxLines="{lines}"' if lines > 1 else ' ellipsis="TRUE"'
     # The font's line height exceeds its size: 1.3 lines of height per line.
@@ -335,7 +330,7 @@ def fitted_text(source, x, w, normal, big, y_normal, y_big, color, lines=1, bold
     def part(y, h, size, show, text_attrs):
         return f'''<PartText x="{x}" y="{y}" width="{w}" height="{h}">
                     <Transform target="alpha" value="({short}) ? {show}" />
-                    <Text align="START"{text_attrs}><Font family="SYNC_TO_DEVICE" size="{size}" color="{color}"{weight}>
+                    <Text align="START"{text_attrs}><Font family="{COMPLICATION_FONT}" size="{size}" color="{color}"{weight}>
                         <Template>%s<Parameter expression="{source}" /></Template>
                     </Font></Text>
                 </PartText>'''
@@ -344,7 +339,7 @@ def fitted_text(source, x, w, normal, big, y_normal, y_big, color, lines=1, bold
 
 
 def complication_slot(slot_id, rect, provider, ptype, kind):
-    """A rounded LCD sub-window. Complication text uses the system font (the
+    """A rounded LCD sub-window. Complication text uses COMPLICATION_FONT (the
     segment font is for time and date only) and grows when it's short
     (fitted_text). Kinds:
     - short: small slot; tall ones show a small title above the value.
@@ -385,7 +380,7 @@ def complication_slot(slot_id, rect, provider, ptype, kind):
             y_n = value_top + (h - value_top - text_n) // 2 - sz(1)
             y_b = value_top + (h - value_top - text_b) // 2 - sz(1)
             title = f'''<PartText x="{title_x}" y="{title_y}" width="{w - title_x - sz(6)}" height="{title_size + sz(2)}">
-                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="{title_size}" color="{LABEL}" weight="BOLD">
+                    <Text align="START" ellipsis="TRUE"><Font family="{COMPLICATION_FONT}" size="{title_size}" color="{LABEL}" weight="BOLD">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>'''
