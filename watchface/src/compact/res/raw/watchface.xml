@@ -784,7 +784,7 @@
              the right), row C wide (long text) -->
         <ComplicationSlot x="62" y="222" width="160" height="34" slotId="3"
             displayName="slot_3" isCustomizable="TRUE" supportedTypes="SHORT_TEXT RANGED_VALUE SMALL_IMAGE MONOCHROMATIC_IMAGE EMPTY">
-            <DefaultProviderPolicy defaultSystemProvider="UNREAD_NOTIFICATION_COUNT" defaultSystemProviderType="SHORT_TEXT" />
+            <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="SHORT_TEXT" />
             <BoundingBox x="0" y="0" width="160" height="34" />
             <Complication type="SHORT_TEXT">
                 <PartImage x="9" y="5" width="19" height="19">
@@ -848,7 +848,7 @@
         </ComplicationSlot>
         <ComplicationSlot x="228" y="222" width="160" height="34" slotId="6"
             displayName="slot_6" isCustomizable="TRUE" supportedTypes="SHORT_TEXT RANGED_VALUE SMALL_IMAGE MONOCHROMATIC_IMAGE EMPTY">
-            <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="SHORT_TEXT" />
+            <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" />
             <BoundingBox x="0" y="0" width="160" height="34" />
             <Complication type="SHORT_TEXT">
                 <PartImage x="9" y="5" width="19" height="19">
@@ -912,7 +912,7 @@
         </ComplicationSlot>
         <ComplicationSlot x="62" y="265" width="160" height="47" slotId="0"
             displayName="slot_0" isCustomizable="TRUE" supportedTypes="SHORT_TEXT RANGED_VALUE SMALL_IMAGE MONOCHROMATIC_IMAGE EMPTY">
-            <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="SHORT_TEXT" />
+            <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" />
             <BoundingBox x="0" y="0" width="160" height="47" />
             <Complication type="SHORT_TEXT">
                 <PartImage x="9" y="19" width="22" height="22">
@@ -984,7 +984,7 @@
         </ComplicationSlot>
         <ComplicationSlot x="228" y="265" width="160" height="47" slotId="1"
             displayName="slot_1" isCustomizable="TRUE" supportedTypes="SHORT_TEXT RANGED_VALUE SMALL_IMAGE MONOCHROMATIC_IMAGE EMPTY">
-            <DefaultProviderPolicy defaultSystemProvider="WORLD_CLOCK" defaultSystemProviderType="SHORT_TEXT" />
+            <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" />
             <BoundingBox x="0" y="0" width="160" height="47" />
             <Complication type="SHORT_TEXT">
                 <PartImage x="9" y="19" width="22" height="22">
@@ -1056,7 +1056,7 @@
         </ComplicationSlot>
         <ComplicationSlot x="106" y="321" width="238" height="41" slotId="4"
             displayName="slot_4" isCustomizable="TRUE" supportedTypes="LONG_TEXT SHORT_TEXT RANGED_VALUE SMALL_IMAGE MONOCHROMATIC_IMAGE EMPTY">
-            <DefaultProviderPolicy defaultSystemProvider="NEXT_EVENT" defaultSystemProviderType="LONG_TEXT" />
+            <DefaultProviderPolicy defaultSystemProvider="WORLD_CLOCK" defaultSystemProviderType="SHORT_TEXT" />
             <BoundingBox x="0" y="0" width="238" height="41" />
             <Complication type="LONG_TEXT">
                 <PartImage x="9" y="6" width="24" height="24">

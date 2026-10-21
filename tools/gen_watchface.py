@@ -109,17 +109,19 @@ RING_SLOT_ID = 2
 RING_DEFAULT = ("WATCH_BATTERY", "RANGED_VALUE")
 # Second ring complication: lights only the segment at its value, in ACCENT.
 POINTER_SLOT_ID = 5
-POINTER_DEFAULT = ("STEP_COUNT", "GOAL_PROGRESS")
+POINTER_DEFAULT = ("EMPTY", "EMPTY")        # meant for chance of rain: no standard provider
 
 # Complication slots: (slot id, (x, y, w, h), default provider, default type, kind)
 # kind: "short" (title + value), "long" (also LONG_TEXT), "large" (big detail
 # panel). Ids 0/1 keep their earlier meaning so existing picks survive updates.
 SLOTS_COMPACT = [
-    (3, box(*COL_L[:1], ROW_A[0], COL_L[1], ROW_A[1]), "UNREAD_NOTIFICATION_COUNT", "SHORT_TEXT", "short"),
-    (6, box(*COL_R[:1], ROW_A[0], COL_R[1], ROW_A[1]), "WATCH_BATTERY", "SHORT_TEXT", "short"),
-    (0, box(*COL_L[:1], ROW_B[0], COL_L[1], ROW_B[1]), "STEP_COUNT", "SHORT_TEXT", "short"),
-    (1, box(*COL_R[:1], ROW_B[0], COL_R[1], ROW_B[1]), "WORLD_CLOCK", "SHORT_TEXT", "short"),
-    (4, box(115, ROW_C[0], 220, ROW_C[1]), "NEXT_EVENT", "LONG_TEXT", "long"),
+    # Defaults use standard providers only; weather, water and chance of rain
+    # have none, so those start empty (meant for: see comments).
+    (3, box(*COL_L[:1], ROW_A[0], COL_L[1], ROW_A[1]), "STEP_COUNT", "SHORT_TEXT", "short"),
+    (6, box(*COL_R[:1], ROW_A[0], COL_R[1], ROW_A[1]), "EMPTY", "EMPTY", "short"),   # weather
+    (0, box(*COL_L[:1], ROW_B[0], COL_L[1], ROW_B[1]), "EMPTY", "EMPTY", "short"),   # water intake
+    (1, box(*COL_R[:1], ROW_B[0], COL_R[1], ROW_B[1]), "EMPTY", "EMPTY", "short"),   # chance of rain
+    (4, box(115, ROW_C[0], 220, ROW_C[1]), "WORLD_CLOCK", "SHORT_TEXT", "long"),
 ]
 
 # Detailed dial: one large panel over rows A+B (calendar, weather, …) and one
@@ -128,7 +130,7 @@ SLOTS_COMPACT = [
 # single small slot sits lower (ROW_C_LOW) than in the compact layout.
 ROW_C_LOW = (324, 38)
 PANEL_TOP, PANEL_BOTTOM = ROW_A[0], ROW_C_LOW[0] - 8
-BOTTOM_SLOT = (4, box(115, ROW_C_LOW[0], 220, ROW_C_LOW[1]), "STEP_COUNT", "SHORT_TEXT", "long")
+BOTTOM_SLOT = (4, box(115, ROW_C_LOW[0], 220, ROW_C_LOW[1]), "WORLD_CLOCK", "SHORT_TEXT", "long")
 
 SLOTS_DETAILED = [
     (10, box(COL_L[0], PANEL_TOP, COL_R[0] + COL_R[1] - COL_L[0], PANEL_BOTTOM - PANEL_TOP),
@@ -139,7 +141,7 @@ SLOTS_DETAILED = [
 # Dual detail: two half-width panels side by side (same columns as compact).
 SLOTS_DUAL = [
     (11, box(COL_L[0], PANEL_TOP, COL_L[1], PANEL_BOTTOM - PANEL_TOP), "NEXT_EVENT", "LONG_TEXT", "large"),
-    (12, box(COL_R[0], PANEL_TOP, COL_R[1], PANEL_BOTTOM - PANEL_TOP), "SUNRISE_SUNSET", "SHORT_TEXT", "large"),
+    (12, box(COL_R[0], PANEL_TOP, COL_R[1], PANEL_BOTTOM - PANEL_TOP), "EMPTY", "EMPTY", "large"),  # weather
     BOTTOM_SLOT,
 ]
 

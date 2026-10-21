@@ -691,7 +691,7 @@
         </Group>
         <ComplicationSlot x="0" y="0" width="450" height="450" slotId="5"
             displayName="slot_pointer" isCustomizable="TRUE" supportedTypes="RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="GOAL_PROGRESS" />
+            <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" />
             <BoundingBox x="0" y="0" width="450" height="450" />
             <Complication type="RANGED_VALUE">
             <PartDraw x="0" y="0" width="450" height="450" >
@@ -1189,7 +1189,7 @@
         </ComplicationSlot>
         <ComplicationSlot x="228" y="222" width="160" height="101" slotId="12"
             displayName="slot_12" isCustomizable="TRUE" supportedTypes="LONG_TEXT PHOTO_IMAGE SHORT_TEXT RANGED_VALUE SMALL_IMAGE MONOCHROMATIC_IMAGE EMPTY">
-            <DefaultProviderPolicy defaultSystemProvider="SUNRISE_SUNSET" defaultSystemProviderType="SHORT_TEXT" />
+            <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" />
             <BoundingBox x="0" y="0" width="160" height="101" />
             <Complication type="LONG_TEXT">
                 <PartImage x="9" y="8" width="26" height="26">
@@ -1312,7 +1312,7 @@
         </ComplicationSlot>
         <ComplicationSlot x="106" y="332" width="238" height="41" slotId="4"
             displayName="slot_4" isCustomizable="TRUE" supportedTypes="LONG_TEXT SHORT_TEXT RANGED_VALUE SMALL_IMAGE MONOCHROMATIC_IMAGE EMPTY">
-            <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="SHORT_TEXT" />
+            <DefaultProviderPolicy defaultSystemProvider="WORLD_CLOCK" defaultSystemProviderType="SHORT_TEXT" />
             <BoundingBox x="0" y="0" width="238" height="41" />
             <Complication type="LONG_TEXT">
                 <PartImage x="9" y="6" width="24" height="24">
