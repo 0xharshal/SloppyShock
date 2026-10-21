@@ -1080,7 +1080,14 @@
                     </Font></Text>
                 </PartText>
                 <PartText x="9" y="35" width="308" height="55">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 16) ? 0 : 255" />
                     <Text align="START" maxLines="2"><Font family="SYNC_TO_DEVICE" size="21" color="#EEF3EC">
+                        <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                    </Font></Text>
+                </PartText>
+                <PartText x="9" y="48" width="308" height="42">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 16) ? 255 : 0" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="32" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -1103,7 +1110,14 @@
                     </Font></Text>
                 </PartText>
                 <PartText x="9" y="35" width="308" height="55">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 16) ? 0 : 255" />
                     <Text align="START" maxLines="2"><Font family="SYNC_TO_DEVICE" size="21" color="#EEF3EC">
+                        <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                    </Font></Text>
+                </PartText>
+                <PartText x="9" y="48" width="308" height="42">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 16) ? 255 : 0" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="32" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -1121,7 +1135,14 @@
                     </Font></Text>
                 </PartText>
                 <PartText x="9" y="35" width="308" height="55">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 16) ? 0 : 255" />
                     <Text align="START" maxLines="2"><Font family="SYNC_TO_DEVICE" size="21" color="#EEF3EC">
+                        <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                    </Font></Text>
+                </PartText>
+                <PartText x="9" y="48" width="308" height="42">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 16) ? 255 : 0" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="32" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>

@@ -67,6 +67,9 @@ See README.md for build commands and layout.
   slots drawn later still get their own taps.
 - `Text maxLines="2"` wraps at word boundaries only **without** `ellipsis`;
   with `ellipsis="TRUE"` the text stays on one line and is truncated.
+- No auto-sizing text in WFF. Detail panels carry a big one-line and a normal
+  two-line variant of the value and pick one with
+  `Transform alpha` on `textLength([COMPLICATION.TEXT]) <= N` (works on Samsung).
 - Providers send icons either as `MONOCHROMATIC_IMAGE` (calendar, …) or as a
   colour `SMALL_IMAGE` (Samsung media controls, weather); slot layouts draw both.
 - Updating a pushed face changes nothing visible unless its `versionCode`

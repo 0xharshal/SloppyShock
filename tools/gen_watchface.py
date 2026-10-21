@@ -372,11 +372,31 @@ def complication_slot(slot_id, rect, provider, ptype, kind):
     text_box_h = text_size if text_lines == 1 else round(text_lines * text_size * 1.3)
     if text_lines > 1:
         text_y = icon_y + title_row + sz(4)   # directly under the title, like a card
-    text = f'''<PartText x="{text_x}" y="{text_y}" width="{text_w}" height="{text_box_h}">
+    text = f'''<PartText x="{text_x}" y="{text_y}" width="{text_w}" height="{text_box_h}">{{show_long}}
                     <Text align="START"{clip}><Font family="SYNC_TO_DEVICE" size="{text_size}" color="{LCD}">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>'''
+    if large:
+        # WFF can't auto-size text, so panels carry two variants and pick one by
+        # length: short values get one big line filling the panel, longer ones
+        # the two-line layout above. The cutoff is how many characters of the
+        # system font (~0.58 em average) fit in one big line.
+        big_size = sz(27 if half else 30)
+        max_big = int(text_w / (0.58 * big_size))
+        short = f"textLength([COMPLICATION.TEXT]) &lt;= {max_big}"
+        area_top = icon_y + title_row + sz(2)
+        big_y = area_top + (h - area_top - big_size) // 2 - sz(3)
+        text = text.replace("{show_long}", f'''
+                    <Transform target="alpha" value="({short}) ? 0 : 255" />''') + f'''
+                <PartText x="{text_x}" y="{big_y}" width="{text_w}" height="{round(big_size * 1.3)}">
+                    <Transform target="alpha" value="({short}) ? 255 : 0" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="{big_size}" color="{LCD}">
+                        <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                    </Font></Text>
+                </PartText>'''
+    else:
+        text = text.replace("{show_long}", "")
     bar_h = sz(3 if large else 2)
     bar = f'''<PartDraw x="{text_x}" y="{h - bar_h - sz(4)}" width="{text_w}" height="{bar_h}">
                     <Rectangle x="0" y="0" width="{text_w}" height="{bar_h}"><Fill color="{GHOST}" /></Rectangle>
