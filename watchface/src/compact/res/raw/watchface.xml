@@ -787,6 +787,9 @@
             <DefaultProviderPolicy defaultSystemProvider="UNREAD_NOTIFICATION_COUNT" defaultSystemProviderType="SHORT_TEXT" />
             <BoundingBox x="0" y="0" width="160" height="34" />
             <Complication type="SHORT_TEXT">
+                <PartImage x="9" y="8" width="17" height="17">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
                 <PartImage x="9" y="8" width="17" height="17" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
@@ -798,6 +801,9 @@
                 </PartText>
             </Complication>
             <Complication type="RANGED_VALUE">
+                <PartImage x="9" y="8" width="17" height="17">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
                 <PartImage x="9" y="8" width="17" height="17" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
@@ -831,6 +837,9 @@
             <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="SHORT_TEXT" />
             <BoundingBox x="0" y="0" width="160" height="34" />
             <Complication type="SHORT_TEXT">
+                <PartImage x="9" y="8" width="17" height="17">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
                 <PartImage x="9" y="8" width="17" height="17" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
@@ -842,6 +851,9 @@
                 </PartText>
             </Complication>
             <Complication type="RANGED_VALUE">
+                <PartImage x="9" y="8" width="17" height="17">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
                 <PartImage x="9" y="8" width="17" height="17" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
@@ -875,6 +887,9 @@
             <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="SHORT_TEXT" />
             <BoundingBox x="0" y="0" width="160" height="47" />
             <Complication type="SHORT_TEXT">
+                <PartImage x="9" y="19" width="19" height="19">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
                 <PartImage x="9" y="19" width="19" height="19" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
@@ -890,6 +905,9 @@
                 </PartText>
             </Complication>
             <Complication type="RANGED_VALUE">
+                <PartImage x="9" y="19" width="19" height="19">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
                 <PartImage x="9" y="19" width="19" height="19" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
@@ -927,6 +945,9 @@
             <DefaultProviderPolicy defaultSystemProvider="WORLD_CLOCK" defaultSystemProviderType="SHORT_TEXT" />
             <BoundingBox x="0" y="0" width="160" height="47" />
             <Complication type="SHORT_TEXT">
+                <PartImage x="9" y="19" width="19" height="19">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
                 <PartImage x="9" y="19" width="19" height="19" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
@@ -942,6 +963,9 @@
                 </PartText>
             </Complication>
             <Complication type="RANGED_VALUE">
+                <PartImage x="9" y="19" width="19" height="19">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
                 <PartImage x="9" y="19" width="19" height="19" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
@@ -979,6 +1003,9 @@
             <DefaultProviderPolicy defaultSystemProvider="NEXT_EVENT" defaultSystemProviderType="LONG_TEXT" />
             <BoundingBox x="0" y="0" width="194" height="35" />
             <Complication type="LONG_TEXT">
+                <PartImage x="9" y="8" width="17" height="17">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
                 <PartImage x="9" y="8" width="17" height="17" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
@@ -990,6 +1017,9 @@
                 </PartText>
             </Complication>
             <Complication type="SHORT_TEXT">
+                <PartImage x="9" y="8" width="17" height="17">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
                 <PartImage x="9" y="8" width="17" height="17" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
@@ -1001,6 +1031,9 @@
                 </PartText>
             </Complication>
             <Complication type="RANGED_VALUE">
+                <PartImage x="9" y="8" width="17" height="17">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
                 <PartImage x="9" y="8" width="17" height="17" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>

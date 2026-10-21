@@ -348,7 +348,12 @@ def complication_slot(slot_id, rect, provider, ptype, kind):
         title_x, title_y = text_x, sz(3)
     text_w = w - text_x - (pad if large else sz(6))
     title_w = w - title_x - (pad if large else sz(6))
-    icon = f'''<PartImage x="{icon_x}" y="{icon_y}" width="{icon_s}" height="{icon_s}" tintColor="{LABEL}">
+    # Providers send either a monochrome icon (tinted to match) or a colour
+    # "small image" (e.g. media, weather); draw whichever is present.
+    icon = f'''<PartImage x="{icon_x}" y="{icon_y}" width="{icon_s}" height="{icon_s}">
+                    <Image resource="[COMPLICATION.SMALL_IMAGE]" />
+                </PartImage>
+                <PartImage x="{icon_x}" y="{icon_y}" width="{icon_s}" height="{icon_s}" tintColor="{LABEL}">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>'''
     title_font = (f'<Font family="lcd_segments_narrow" size="{title_size}" color="{ACCENT}">' if large else
