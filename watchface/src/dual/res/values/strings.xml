@@ -1,0 +1,13 @@
+<resources>
+    <string name="watch_face_name">SloppyShock Dual</string>
+    <string name="ring_label">Ring</string>
+    <string name="ring_complication">Complication (battery, steps, …)</string>
+    <string name="ring_seconds">Seconds</string>
+    <string name="slot_11">Left detail panel complication</string>
+    <string name="slot_12">Right detail panel complication</string>
+    <string name="slot_4">Bottom complication</string>
+    <string name="slot_ring">Ring</string>
+    <string name="slot_pointer">Ring marker (yellow)</string>
+    <string name="tap_time">Tap on time</string>
+    <string name="tap_date">Tap on date</string>
+</resources>
