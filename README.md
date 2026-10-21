@@ -105,7 +105,7 @@ which publishes the signed app APK.
 ```
 tools/
   gen_watchface.py       # generates every face's watchface.xml + strings.xml
-  gen_segment_font.py    # generates the segment fonts (wide + narrow) and always-on digit PNGs
+  gen_segment_font.py    # generates the segment font and always-on digit PNGs
 watchface/               # the faces: flavors compact/detailed/dual, one APK each
   build.gradle.kts       # validation tasks (validate<Face><Type>), installAllFaces
   src/main/              # shared: manifest, watch_face_info, font, digit PNGs (generated)

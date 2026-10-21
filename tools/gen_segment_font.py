@@ -146,10 +146,9 @@ def draw(polys, x_offset):
 
 
 # Font variants: (file name, family, body width, thickness, inner thickness, side bearing).
-# "narrow" fits ~40% more characters; used for complication text.
+# Add narrower variants here if needed (e.g. body width 360 fits ~40% more chars).
 VARIANTS = [
     ("lcd_segments", "Segment7", 520, 110, 66, 70),
-    ("lcd_segments_narrow", "Segment7 Narrow", 360, 96, 56, 40),
 ]
 
 

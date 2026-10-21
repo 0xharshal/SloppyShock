@@ -794,8 +794,8 @@
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 
-                <PartText x="30" y="6" width="124" height="22">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="22" color="#EEF3EC">
+                <PartText x="30" y="8" width="124" height="18">
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="18" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -808,8 +808,8 @@
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 
-                <PartText x="30" y="6" width="124" height="22">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="22" color="#EEF3EC">
+                <PartText x="30" y="8" width="124" height="18">
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="18" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -844,8 +844,8 @@
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 
-                <PartText x="30" y="6" width="124" height="22">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="22" color="#EEF3EC">
+                <PartText x="30" y="8" width="124" height="18">
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="18" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -858,8 +858,8 @@
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 
-                <PartText x="30" y="6" width="124" height="22">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="22" color="#EEF3EC">
+                <PartText x="30" y="8" width="124" height="18">
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="18" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -887,10 +887,10 @@
             <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="SHORT_TEXT" />
             <BoundingBox x="0" y="0" width="160" height="47" />
             <Complication type="SHORT_TEXT">
-                <PartImage x="9" y="19" width="19" height="19">
+                <PartImage x="9" y="17" width="19" height="19">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
-                <PartImage x="9" y="19" width="19" height="19" tintColor="#4DD0E1">
+                <PartImage x="9" y="17" width="19" height="19" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 <PartText x="32" y="3" width="122" height="13">
@@ -898,17 +898,17 @@
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="32" y="17" width="122" height="24">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="24" color="#EEF3EC">
+                <PartText x="32" y="17" width="122" height="19">
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="19" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartImage x="9" y="19" width="19" height="19">
+                <PartImage x="9" y="17" width="19" height="19">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
-                <PartImage x="9" y="19" width="19" height="19" tintColor="#4DD0E1">
+                <PartImage x="9" y="17" width="19" height="19" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 <PartText x="32" y="3" width="122" height="13">
@@ -916,8 +916,8 @@
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="32" y="17" width="122" height="24">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="24" color="#EEF3EC">
+                <PartText x="32" y="17" width="122" height="19">
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="19" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -945,10 +945,10 @@
             <DefaultProviderPolicy defaultSystemProvider="WORLD_CLOCK" defaultSystemProviderType="SHORT_TEXT" />
             <BoundingBox x="0" y="0" width="160" height="47" />
             <Complication type="SHORT_TEXT">
-                <PartImage x="9" y="19" width="19" height="19">
+                <PartImage x="9" y="17" width="19" height="19">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
-                <PartImage x="9" y="19" width="19" height="19" tintColor="#4DD0E1">
+                <PartImage x="9" y="17" width="19" height="19" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 <PartText x="32" y="3" width="122" height="13">
@@ -956,17 +956,17 @@
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="32" y="17" width="122" height="24">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="24" color="#EEF3EC">
+                <PartText x="32" y="17" width="122" height="19">
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="19" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartImage x="9" y="19" width="19" height="19">
+                <PartImage x="9" y="17" width="19" height="19">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
-                <PartImage x="9" y="19" width="19" height="19" tintColor="#4DD0E1">
+                <PartImage x="9" y="17" width="19" height="19" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 <PartText x="32" y="3" width="122" height="13">
@@ -974,8 +974,8 @@
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="32" y="17" width="122" height="24">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="24" color="#EEF3EC">
+                <PartText x="32" y="17" width="122" height="19">
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="19" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -1010,8 +1010,8 @@
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 
-                <PartText x="35" y="8" width="197" height="25">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="25" color="#EEF3EC">
+                <PartText x="35" y="10" width="197" height="21">
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="21" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -1024,8 +1024,8 @@
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 
-                <PartText x="35" y="8" width="197" height="25">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="25" color="#EEF3EC">
+                <PartText x="35" y="10" width="197" height="21">
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="21" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -1038,8 +1038,8 @@
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 
-                <PartText x="35" y="8" width="197" height="25">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="25" color="#EEF3EC">
+                <PartText x="35" y="10" width="197" height="21">
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="21" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>

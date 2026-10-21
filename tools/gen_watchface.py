@@ -320,9 +320,9 @@ def ring_options():
 def complication_slot(slot_id, rect, provider, ptype, kind):
     """A rounded LCD sub-window.
     short/long: tall slots show title above value, compact ones icon + value.
-    large: a detail panel - icon + title (segment font, accent colour) on top,
+    large: a detail panel - icon + title (accent colour) on top,
     a full-width value line below, progress bar for ranged values, full-size
-    images. All text uses the narrow segment font (fits ~40% more chars).
+    images. Complication text uses the system font, unlike time and date.
     Panel values wrap onto two lines (maxLines="2"; wrapping only works
     without ellipsis); single-line slot text ends in an ellipsis."""
     x, y, w, h = rect
@@ -334,9 +334,10 @@ def complication_slot(slot_id, rect, provider, ptype, kind):
     icon_s = sz(20 if large or wide else 18 if tall else 16)
     # half panel: 14 chars ("MEDIA CONTROLS"); full panel: ~23 chars
     # Panel titles carry key values (e.g. the weather temperature): same size as the value.
-    title_size = sz(21 if half else 23) if large else sz(10)
+    title_size = sz(18 if half else 20) if large else sz(10)
     # Panel values: large enough to read; wrap onto a second line when longer.
-    text_size = sz(21 if half else 23) if large else sz(23 if wide else 22 if tall else 20)
+    # Complication text uses the system font (segment fonts are for time/date only).
+    text_size = sz(17 if half else 19) if large else sz(19 if wide else 18 if tall else 17)
     text_lines = 2 if large else 1
     if large:
         icon_x, icon_y = pad, sz(8)
@@ -359,7 +360,7 @@ def complication_slot(slot_id, rect, provider, ptype, kind):
                 <PartImage x="{icon_x}" y="{icon_y}" width="{icon_s}" height="{icon_s}" tintColor="{LABEL}">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>'''
-    title_font = (f'<Font family="lcd_segments_narrow" size="{title_size}" color="{ACCENT}">' if large else
+    title_font = (f'<Font family="SYNC_TO_DEVICE" size="{title_size}" color="{ACCENT}" weight="BOLD">' if large else
                   f'<Font family="SYNC_TO_DEVICE" size="{title_size}" color="{LABEL}" weight="BOLD">')
     title = f'''<PartText x="{title_x}" y="{title_y}" width="{title_w}" height="{title_size + sz(2)}">
                     <Text align="START" ellipsis="TRUE">{title_font}
@@ -372,7 +373,7 @@ def complication_slot(slot_id, rect, provider, ptype, kind):
     if text_lines > 1:
         text_y = icon_y + title_row + sz(4)   # directly under the title, like a card
     text = f'''<PartText x="{text_x}" y="{text_y}" width="{text_w}" height="{text_box_h}">
-                    <Text align="START"{clip}><Font family="lcd_segments_narrow" size="{text_size}" color="{LCD}">
+                    <Text align="START"{clip}><Font family="SYNC_TO_DEVICE" size="{text_size}" color="{LCD}">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>'''
