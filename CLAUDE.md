@@ -21,8 +21,10 @@ See README.md for build commands and layout.
   `watchface.xml`, the font and the digit PNGs (they are referenced by name
   only), leaving an empty face. Check `unzip -l` of a release APK after build
   config changes.
-- Releases: `.github/workflows/release.yml` builds the signed app APK for `v*`
-  tags. App key from `SIGNING_*`, face key from `FACE_SIGNING_*` (Watch Face
+- Releases: `.github/workflows/release.yml` runs `distRelease` for `v*` tags
+  and publishes `SloppyShock-App-<v>.apk` plus `SloppyShock-Face-<Layout>-<v>.apk`
+  (the face APKs install directly on Wear OS 5+; same packages as the pushed
+  faces, so a layout is either single-installed or pushed, not both). App key from `SIGNING_*`, face key from `FACE_SIGNING_*` (Watch Face
   Push wants a separate face key); env vars / repository secrets, never commit
   a keystore.
 

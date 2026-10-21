@@ -1,5 +1,6 @@
-# Builds the signed SloppyShock watch app (all faces bundled) for a version tag
-# (v*) and publishes it as a GitHub Release.
+# Builds the signed SloppyShock watch app (all faces bundled) and each watch
+# face as its own APK for a version tag (v*), and publishes them as a GitHub
+# Release.
 #
 # Required repository secrets (Watch Face Push wants faces signed with a key
 # different from the app's):
@@ -43,7 +44,7 @@ jobs:
           echo "$SIGNING_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/app.jks"
           echo "$FACE_SIGNING_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/faces.jks"
 
-      - name: Build release APK
+      - name: Build release APKs
         env:
           SIGNING_KEYSTORE: ${{ runner.temp }}/app.jks
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
@@ -56,12 +57,11 @@ jobs:
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
           # versionCode must grow with every release; offset keeps it above local builds.
-          ./gradlew :app:assembleRelease \
+          # build/dist/release: SloppyShock-App-<v>.apk + SloppyShock-Face-<Layout>-<v>.apk
+          ./gradlew distRelease \
             -PversionName="$VERSION" -PversionCode=$((GITHUB_RUN_NUMBER + 100))
-          mkdir dist
-          cp app/build/outputs/apk/release/app-release.apk "dist/SloppyShock-$VERSION.apk"
 
       - uses: softprops/action-gh-release@v2
         with:
-          files: dist/*.apk
+          files: build/dist/release/*.apk
           generate_release_notes: true

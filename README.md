@@ -29,9 +29,19 @@ on other round Wear OS 6 watches; square screens are not supported.
 
 ## Install on your watch
 
-You need one file, `SloppyShock-<version>.apk` (the watch app), and a watch
-running **Wear OS 6**. Watch apps can't be installed by tapping the APK, so it
-goes over the watch's wireless debugging, either from your phone or from a PC.
+Each release has two kinds of APK; pick one:
+
+| File | What it is | Needs |
+|---|---|---|
+| `SloppyShock-App-<version>.apk` | the SloppyShock app with all three faces; switch layouts in the app | Wear OS 6 |
+| `SloppyShock-Face-<Layout>-<version>.apk` | a single face (`Compact`, `Detailed` or `Dual`), nothing else | Wear OS 5 or newer |
+
+Use the app **or** the single faces for a layout, not both: a single face and
+the face the app installs share the same package, so uninstall a single face
+before using that layout from the app (and vice versa).
+
+APKs can't be installed on a watch by tapping them, so they go over the
+watch's wireless debugging, either from your phone or from a PC.
 
 **1. Enable wireless debugging on the watch (once)**
 
@@ -44,11 +54,12 @@ goes over the watch's wireless debugging, either from your phone or from a PC.
 **2a. Install from your phone with Wear Installer 2 (no PC)**
 
 1. Install [Wear Installer 2](https://play.google.com/store/search?q=Wear%20Installer%202&c=apps)
-   from Google Play on your phone and download `SloppyShock-<version>.apk` to the phone.
+   from Google Play on your phone and download the APK(s) to the phone.
 2. On the watch open Wireless debugging → **Pair new device**; enter the shown
    IP address, port and pairing code in Wear Installer 2 (its built-in help
    video walks through this).
-3. Choose the downloaded APK in Wear Installer 2 and install it.
+3. Choose the downloaded APK in Wear Installer 2 and install it (repeat for
+   each single face you want).
 
 **2b. Or install from a PC with adb**
 
@@ -61,12 +72,13 @@ adb connect <watch-ip>:<port>             # port shown on the Wireless debugging
 ```
 
 ```bash
-adb install SloppyShock-<version>.apk
+adb install SloppyShock-App-<version>.apk      # or SloppyShock-Face-Dual-<version>.apk, …
 ```
 
 **3. Use it**
 
-- Installing the app also installs the **SloppyShock** face. Long-press the
+- **Single face:** long-press the watch face and pick it from the list.
+- **App:** installing the app also installs the **SloppyShock** face. Long-press the
   watch face and pick it, or open the **SloppyShock** app and tap **Use**.
 - Switch layouts in the app (Wear OS allows one face per app, so **Use**
   replaces the current SloppyShock face). Switching resets that face's
@@ -84,8 +96,8 @@ JDK 25 (Gradle toolchain; wrapper included), Python 3 with `fontTools` and
 `Pillow` (only to regenerate sources).
 
 ```bash
-./gradlew :app:assembleDebug     # the watch app, faces bundled (app/build/outputs/apk/)
-./gradlew :app:installDebug      # install it (ANDROID_SERIAL=<watch> with several devices)
+./gradlew distDebug              # build/dist/debug: SloppyShock-App-dev.apk + SloppyShock-Face-*-dev.apk
+./gradlew :app:installDebug      # install the app (ANDROID_SERIAL=<watch> with several devices)
 ```
 
 The build validates every face with Google's Watch Face Push validator and
@@ -98,8 +110,10 @@ faces directly instead: `./gradlew :watchface:installAllFaces`.
 Release builds need signing keys from environment variables: `SIGNING_*` for
 the app and `FACE_SIGNING_*` for the faces (Watch Face Push requires a separate
 key for faces), each with `_KEYSTORE`, `_STORE_PASSWORD`, `_KEY_ALIAS`,
-`_KEY_PASSWORD`. Tagging `v*` on GitHub runs `.github/workflows/release.yml`,
-which publishes the signed app APK.
+`_KEY_PASSWORD`. `./gradlew distRelease -PversionName=X` collects the signed
+APKs in `build/dist/release`. Tagging `v*` on GitHub runs
+`.github/workflows/release.yml`, which publishes the app and all single-face
+APKs.
 
 ## Project structure
 
