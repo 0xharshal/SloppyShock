@@ -317,41 +317,83 @@ def ring_options():
             </ListOption>'''
 
 
+# System font: average character advance, used to decide how much text fits.
+CHAR_EM = 0.58
+
+
+def fitted_text(source, x, w, normal, big, y_normal, y_big, color, lines=1, bold=False):
+    """WFF can't auto-size text, so this emits two variants of `source` and shows
+    one by length: text that fits on one line at the `big` size gets it, longer
+    text uses the `normal` size (wrapped over `lines` lines, else ellipsized)."""
+    weight = ' weight="BOLD"' if bold else ""
+    max_big = int(w / ((CHAR_EM + (0.04 if bold else 0)) * big))
+    short = f"textLength({source}) &lt;= {max_big}"
+    wrap = f' maxLines="{lines}"' if lines > 1 else ' ellipsis="TRUE"'
+    # The font's line height exceeds its size: 1.3 lines of height per line.
+    normal_h = normal if lines == 1 else round(lines * normal * 1.3)
+
+    def part(y, h, size, show, text_attrs):
+        return f'''<PartText x="{x}" y="{y}" width="{w}" height="{h}">
+                    <Transform target="alpha" value="({short}) ? {show}" />
+                    <Text align="START"{text_attrs}><Font family="SYNC_TO_DEVICE" size="{size}" color="{color}"{weight}>
+                        <Template>%s<Parameter expression="{source}" /></Template>
+                    </Font></Text>
+                </PartText>'''
+    return (part(y_normal, normal_h, normal, "0 : 255", wrap) + "\n                " +
+            part(y_big, round(big * 1.3), big, "255 : 0", ' ellipsis="TRUE"'))
+
+
 def complication_slot(slot_id, rect, provider, ptype, kind):
-    """A rounded LCD sub-window.
-    short/long: tall slots show title above value, compact ones icon + value.
-    large: a detail panel - icon + title (accent colour) on top,
-    a full-width value line below, progress bar for ranged values, full-size
-    images. Complication text uses the system font, unlike time and date.
-    Panel values wrap onto two lines (maxLines="2"; wrapping only works
-    without ellipsis); single-line slot text ends in an ellipsis."""
+    """A rounded LCD sub-window. Complication text uses the system font (the
+    segment font is for time and date only) and grows when it's short
+    (fitted_text). Kinds:
+    - short: small slot; tall ones show a small title above the value.
+    - long:  the wide bottom slot, one line (also accepts LONG_TEXT).
+    - large: detail panel - icon + title (accent, e.g. the temperature) on top,
+             the value below on up to two lines, bar for ranged values,
+             full-size images."""
     x, y, w, h = rect
     large = kind == "large"
     half = large and w <= sz(200)
-    tall = large or h >= sz(40)
-    pad = sz(8 if large else 8)
-    wide = kind == "long"          # the bottom slot: one big line
-    icon_s = sz(20 if large or wide else 18 if tall else 16)
-    # half panel: 14 chars ("MEDIA CONTROLS"); full panel: ~23 chars
-    # Panel titles carry key values (e.g. the weather temperature): same size as the value.
-    title_size = sz(18 if half else 20) if large else sz(10)
-    # Panel values: large enough to read; wrap onto a second line when longer.
-    # Complication text uses the system font (segment fonts are for time/date only).
-    text_size = sz(17 if half else 19) if large else sz(19 if wide else 18 if tall else 17)
-    text_lines = 2 if large else 1
+    tall = not large and h >= sz(40)
+    pad = sz(8)
     if large:
-        icon_x, icon_y = pad, sz(8)
-        title_x, title_y = pad + icon_s + sz(5), icon_y + min(0, (icon_s - title_size) // 2)
-        title_row = max(icon_s, title_size)
-        text_x = pad
-        text_y = icon_y + icon_s + (h - icon_y - icon_s - text_size) // 2 - sz(3)
+        icon_s = sz(24)
+        icon_x, icon_y = pad, sz(7)
+        title_n, title_b = (sz(20), sz(26)) if half else (sz(22), sz(28))
+        title_x = pad + icon_s + sz(5)
+        title_w = w - title_x - pad
+        title_row = max(icon_s, title_b)
+        area_top = icon_y + title_row + sz(2)
+        text_x, text_w = pad, w - 2 * pad
+        text_n, text_b = (sz(17), sz(27)) if half else (sz(19), sz(30))
+        title = fitted_text("[COMPLICATION.TITLE]", title_x, title_w, title_n, title_b,
+                            icon_y + (icon_s - title_n) // 2, icon_y + (icon_s - title_b) // 2,
+                            ACCENT, bold=True)
+        text = fitted_text("[COMPLICATION.TEXT]", text_x, text_w, text_n, text_b,
+                           area_top + sz(2), area_top + (h - area_top - text_b) // 2 - sz(3),
+                           LCD, lines=2)
     else:
-        text_x = pad + icon_s + sz(4)
-        text_y = sz(16) if tall else (h - text_size) // 2
-        icon_x, icon_y = pad, text_y + (text_size - icon_s) // 2
-        title_x, title_y = text_x, sz(3)
-    text_w = w - text_x - (pad if large else sz(6))
-    title_w = w - title_x - (pad if large else sz(6))
+        icon_s = sz(22 if kind == "long" else 20 if tall else 18)
+        text_n, text_b = {"long": (sz(19), sz(25))}.get(kind, (sz(18), sz(23)) if tall else (sz(17), sz(22)))
+        text_x = pad + icon_s + sz(5)
+        text_w = w - text_x - sz(6)
+        if tall:
+            # small title on top, value below
+            title_x, title_y, title_size = text_x, sz(3), sz(10)
+            value_top = sz(15)
+            y_n = value_top + (h - value_top - text_n) // 2 - sz(1)
+            y_b = value_top + (h - value_top - text_b) // 2 - sz(1)
+            title = f'''<PartText x="{title_x}" y="{title_y}" width="{w - title_x - sz(6)}" height="{title_size + sz(2)}">
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="{title_size}" color="{LABEL}" weight="BOLD">
+                        <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
+                    </Font></Text>
+                </PartText>'''
+        else:
+            y_n, y_b = (h - text_n) // 2 - sz(2), (h - text_b) // 2 - sz(2)
+            title = ""
+        icon_x, icon_y = pad, (y_n + y_b) // 2 + (text_n + text_b) // 4 - icon_s // 2
+        text = fitted_text("[COMPLICATION.TEXT]", text_x, text_w, text_n, text_b, y_n, y_b, LCD)
     # Providers send either a monochrome icon (tinted to match) or a colour
     # "small image" (e.g. media, weather); draw whichever is present.
     icon = f'''<PartImage x="{icon_x}" y="{icon_y}" width="{icon_s}" height="{icon_s}">
@@ -360,43 +402,6 @@ def complication_slot(slot_id, rect, provider, ptype, kind):
                 <PartImage x="{icon_x}" y="{icon_y}" width="{icon_s}" height="{icon_s}" tintColor="{LABEL}">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>'''
-    title_font = (f'<Font family="SYNC_TO_DEVICE" size="{title_size}" color="{ACCENT}" weight="BOLD">' if large else
-                  f'<Font family="SYNC_TO_DEVICE" size="{title_size}" color="{LABEL}" weight="BOLD">')
-    title = f'''<PartText x="{title_x}" y="{title_y}" width="{title_w}" height="{title_size + sz(2)}">
-                    <Text align="START" ellipsis="TRUE">{title_font}
-                        <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
-                    </Font></Text>
-                </PartText>''' if tall else ""
-    clip = ' maxLines="2"' if text_lines > 1 else ' ellipsis="TRUE"'
-    # The font's line height exceeds its size: give wrapped text 1.3 lines each.
-    text_box_h = text_size if text_lines == 1 else round(text_lines * text_size * 1.3)
-    if text_lines > 1:
-        text_y = icon_y + title_row + sz(4)   # directly under the title, like a card
-    text = f'''<PartText x="{text_x}" y="{text_y}" width="{text_w}" height="{text_box_h}">{{show_long}}
-                    <Text align="START"{clip}><Font family="SYNC_TO_DEVICE" size="{text_size}" color="{LCD}">
-                        <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
-                    </Font></Text>
-                </PartText>'''
-    if large:
-        # WFF can't auto-size text, so panels carry two variants and pick one by
-        # length: short values get one big line filling the panel, longer ones
-        # the two-line layout above. The cutoff is how many characters of the
-        # system font (~0.58 em average) fit in one big line.
-        big_size = sz(27 if half else 30)
-        max_big = int(text_w / (0.58 * big_size))
-        short = f"textLength([COMPLICATION.TEXT]) &lt;= {max_big}"
-        area_top = icon_y + title_row + sz(2)
-        big_y = area_top + (h - area_top - big_size) // 2 - sz(3)
-        text = text.replace("{show_long}", f'''
-                    <Transform target="alpha" value="({short}) ? 0 : 255" />''') + f'''
-                <PartText x="{text_x}" y="{big_y}" width="{text_w}" height="{round(big_size * 1.3)}">
-                    <Transform target="alpha" value="({short}) ? 255 : 0" />
-                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="{big_size}" color="{LCD}">
-                        <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
-                    </Font></Text>
-                </PartText>'''
-    else:
-        text = text.replace("{show_long}", "")
     bar_h = sz(3 if large else 2)
     bar = f'''<PartDraw x="{text_x}" y="{h - bar_h - sz(4)}" width="{text_w}" height="{bar_h}">
                     <Rectangle x="0" y="0" width="{text_w}" height="{bar_h}"><Fill color="{GHOST}" /></Rectangle>

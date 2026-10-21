@@ -1069,24 +1069,31 @@
             <DefaultProviderPolicy defaultSystemProvider="NEXT_EVENT" defaultSystemProviderType="LONG_TEXT" />
             <BoundingBox x="0" y="0" width="160" height="101" />
             <Complication type="LONG_TEXT">
-                <PartImage x="9" y="9" width="22" height="22">
+                <PartImage x="9" y="8" width="26" height="26">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
-                <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
+                <PartImage x="9" y="8" width="26" height="26" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
-                <PartText x="36" y="9" width="115" height="21">
-                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="19" color="#FFE082" weight="BOLD">
+                <PartText x="40" y="10" width="111" height="22">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TITLE]) &lt;= 6) ? 0 : 255" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="22" color="#FFE082" weight="BOLD">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="35" width="142" height="47">
+                <PartText x="40" y="7" width="111" height="36">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TITLE]) &lt;= 6) ? 255 : 0" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="28" color="#FFE082" weight="BOLD">
+                        <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
+                    </Font></Text>
+                </PartText>
+                <PartText x="9" y="40" width="142" height="47">
                     <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 8) ? 0 : 255" />
                     <Text align="START" maxLines="2"><Font family="SYNC_TO_DEVICE" size="18" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="49" width="142" height="38">
+                <PartText x="9" y="52" width="142" height="38">
                     <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 8) ? 255 : 0" />
                     <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="29" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
@@ -1099,24 +1106,31 @@
                 </PartImage>
             </Complication>
             <Complication type="SHORT_TEXT">
-                <PartImage x="9" y="9" width="22" height="22">
+                <PartImage x="9" y="8" width="26" height="26">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
-                <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
+                <PartImage x="9" y="8" width="26" height="26" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
-                <PartText x="36" y="9" width="115" height="21">
-                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="19" color="#FFE082" weight="BOLD">
+                <PartText x="40" y="10" width="111" height="22">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TITLE]) &lt;= 6) ? 0 : 255" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="22" color="#FFE082" weight="BOLD">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="35" width="142" height="47">
+                <PartText x="40" y="7" width="111" height="36">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TITLE]) &lt;= 6) ? 255 : 0" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="28" color="#FFE082" weight="BOLD">
+                        <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
+                    </Font></Text>
+                </PartText>
+                <PartText x="9" y="40" width="142" height="47">
                     <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 8) ? 0 : 255" />
                     <Text align="START" maxLines="2"><Font family="SYNC_TO_DEVICE" size="18" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="49" width="142" height="38">
+                <PartText x="9" y="52" width="142" height="38">
                     <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 8) ? 255 : 0" />
                     <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="29" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
@@ -1124,24 +1138,31 @@
                 </PartText>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartImage x="9" y="9" width="22" height="22">
+                <PartImage x="9" y="8" width="26" height="26">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
-                <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
+                <PartImage x="9" y="8" width="26" height="26" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
-                <PartText x="36" y="9" width="115" height="21">
-                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="19" color="#FFE082" weight="BOLD">
+                <PartText x="40" y="10" width="111" height="22">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TITLE]) &lt;= 6) ? 0 : 255" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="22" color="#FFE082" weight="BOLD">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="35" width="142" height="47">
+                <PartText x="40" y="7" width="111" height="36">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TITLE]) &lt;= 6) ? 255 : 0" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="28" color="#FFE082" weight="BOLD">
+                        <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
+                    </Font></Text>
+                </PartText>
+                <PartText x="9" y="40" width="142" height="47">
                     <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 8) ? 0 : 255" />
                     <Text align="START" maxLines="2"><Font family="SYNC_TO_DEVICE" size="18" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="49" width="142" height="38">
+                <PartText x="9" y="52" width="142" height="38">
                     <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 8) ? 255 : 0" />
                     <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="29" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
@@ -1171,24 +1192,31 @@
             <DefaultProviderPolicy defaultSystemProvider="SUNRISE_SUNSET" defaultSystemProviderType="SHORT_TEXT" />
             <BoundingBox x="0" y="0" width="160" height="101" />
             <Complication type="LONG_TEXT">
-                <PartImage x="9" y="9" width="22" height="22">
+                <PartImage x="9" y="8" width="26" height="26">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
-                <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
+                <PartImage x="9" y="8" width="26" height="26" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
-                <PartText x="36" y="9" width="115" height="21">
-                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="19" color="#FFE082" weight="BOLD">
+                <PartText x="40" y="10" width="111" height="22">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TITLE]) &lt;= 6) ? 0 : 255" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="22" color="#FFE082" weight="BOLD">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="35" width="142" height="47">
+                <PartText x="40" y="7" width="111" height="36">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TITLE]) &lt;= 6) ? 255 : 0" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="28" color="#FFE082" weight="BOLD">
+                        <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
+                    </Font></Text>
+                </PartText>
+                <PartText x="9" y="40" width="142" height="47">
                     <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 8) ? 0 : 255" />
                     <Text align="START" maxLines="2"><Font family="SYNC_TO_DEVICE" size="18" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="49" width="142" height="38">
+                <PartText x="9" y="52" width="142" height="38">
                     <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 8) ? 255 : 0" />
                     <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="29" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
@@ -1201,24 +1229,31 @@
                 </PartImage>
             </Complication>
             <Complication type="SHORT_TEXT">
-                <PartImage x="9" y="9" width="22" height="22">
+                <PartImage x="9" y="8" width="26" height="26">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
-                <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
+                <PartImage x="9" y="8" width="26" height="26" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
-                <PartText x="36" y="9" width="115" height="21">
-                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="19" color="#FFE082" weight="BOLD">
+                <PartText x="40" y="10" width="111" height="22">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TITLE]) &lt;= 6) ? 0 : 255" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="22" color="#FFE082" weight="BOLD">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="35" width="142" height="47">
+                <PartText x="40" y="7" width="111" height="36">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TITLE]) &lt;= 6) ? 255 : 0" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="28" color="#FFE082" weight="BOLD">
+                        <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
+                    </Font></Text>
+                </PartText>
+                <PartText x="9" y="40" width="142" height="47">
                     <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 8) ? 0 : 255" />
                     <Text align="START" maxLines="2"><Font family="SYNC_TO_DEVICE" size="18" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="49" width="142" height="38">
+                <PartText x="9" y="52" width="142" height="38">
                     <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 8) ? 255 : 0" />
                     <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="29" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
@@ -1226,24 +1261,31 @@
                 </PartText>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartImage x="9" y="9" width="22" height="22">
+                <PartImage x="9" y="8" width="26" height="26">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
-                <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
+                <PartImage x="9" y="8" width="26" height="26" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
-                <PartText x="36" y="9" width="115" height="21">
-                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="19" color="#FFE082" weight="BOLD">
+                <PartText x="40" y="10" width="111" height="22">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TITLE]) &lt;= 6) ? 0 : 255" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="22" color="#FFE082" weight="BOLD">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="35" width="142" height="47">
+                <PartText x="40" y="7" width="111" height="36">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TITLE]) &lt;= 6) ? 255 : 0" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="28" color="#FFE082" weight="BOLD">
+                        <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
+                    </Font></Text>
+                </PartText>
+                <PartText x="9" y="40" width="142" height="47">
                     <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 8) ? 0 : 255" />
                     <Text align="START" maxLines="2"><Font family="SYNC_TO_DEVICE" size="18" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="49" width="142" height="38">
+                <PartText x="9" y="52" width="142" height="38">
                     <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 8) ? 255 : 0" />
                     <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="29" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
@@ -1273,50 +1315,71 @@
             <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="SHORT_TEXT" />
             <BoundingBox x="0" y="0" width="238" height="41" />
             <Complication type="LONG_TEXT">
-                <PartImage x="9" y="9" width="22" height="22">
+                <PartImage x="9" y="6" width="24" height="24">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
-                <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
+                <PartImage x="9" y="6" width="24" height="24" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 
-                <PartText x="35" y="10" width="197" height="21">
+                <PartText x="38" y="8" width="194" height="21">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 12) ? 0 : 255" />
                     <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="21" color="#EEF3EC">
+                        <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                    </Font></Text>
+                </PartText>
+                <PartText x="38" y="5" width="194" height="35">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 12) ? 255 : 0" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="27" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
             </Complication>
             <Complication type="SHORT_TEXT">
-                <PartImage x="9" y="9" width="22" height="22">
+                <PartImage x="9" y="6" width="24" height="24">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
-                <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
+                <PartImage x="9" y="6" width="24" height="24" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 
-                <PartText x="35" y="10" width="197" height="21">
+                <PartText x="38" y="8" width="194" height="21">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 12) ? 0 : 255" />
                     <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="21" color="#EEF3EC">
+                        <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                    </Font></Text>
+                </PartText>
+                <PartText x="38" y="5" width="194" height="35">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 12) ? 255 : 0" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="27" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartImage x="9" y="9" width="22" height="22">
+                <PartImage x="9" y="6" width="24" height="24">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
-                <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
+                <PartImage x="9" y="6" width="24" height="24" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 
-                <PartText x="35" y="10" width="197" height="21">
+                <PartText x="38" y="8" width="194" height="21">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 12) ? 0 : 255" />
                     <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="21" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartDraw x="35" y="35" width="197" height="2">
-                    <Rectangle x="0" y="0" width="197" height="2"><Fill color="#1D2226" /></Rectangle>
-                    <Rectangle x="0" y="0" width="197" height="2">
-                        <Transform target="width" value="clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0, 1) * 197" />
+                <PartText x="38" y="5" width="194" height="35">
+                    <Transform target="alpha" value="(textLength([COMPLICATION.TEXT]) &lt;= 12) ? 255 : 0" />
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="27" color="#EEF3EC">
+                        <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                    </Font></Text>
+                </PartText>
+                <PartDraw x="38" y="35" width="194" height="2">
+                    <Rectangle x="0" y="0" width="194" height="2"><Fill color="#1D2226" /></Rectangle>
+                    <Rectangle x="0" y="0" width="194" height="2">
+                        <Transform target="width" value="clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0, 1) * 194" />
                         <Fill color="#FFE082" />
                     </Rectangle>
                 </PartDraw>
