@@ -995,7 +995,7 @@
             <Line startX="48" startY="213" endX="402" endY="213"><Stroke color="#2B3238" thickness="1" /></Line>
             <RoundRectangle x="62" y="222" width="160" height="101" cornerRadiusX="11" cornerRadiusY="11"><Stroke color="#2B3238" thickness="1" /></RoundRectangle>
             <RoundRectangle x="228" y="222" width="160" height="101" cornerRadiusX="11" cornerRadiusY="11"><Stroke color="#2B3238" thickness="1" /></RoundRectangle>
-            <RoundRectangle x="128" y="332" width="194" height="34" cornerRadiusX="11" cornerRadiusY="11"><Stroke color="#2B3238" thickness="1" /></RoundRectangle>
+            <RoundRectangle x="106" y="332" width="238" height="41" cornerRadiusX="11" cornerRadiusY="11"><Stroke color="#2B3238" thickness="1" /></RoundRectangle>
         </PartDraw>
 
 
@@ -1226,66 +1226,66 @@
                 </PartImage>
             </Complication>
         </ComplicationSlot>
-        <ComplicationSlot x="128" y="332" width="194" height="34" slotId="4"
+        <ComplicationSlot x="106" y="332" width="238" height="41" slotId="4"
             displayName="slot_4" isCustomizable="TRUE" supportedTypes="LONG_TEXT SHORT_TEXT RANGED_VALUE SMALL_IMAGE MONOCHROMATIC_IMAGE EMPTY">
             <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="SHORT_TEXT" />
-            <BoundingBox x="0" y="0" width="194" height="34" />
+            <BoundingBox x="0" y="0" width="238" height="41" />
             <Complication type="LONG_TEXT">
-                <PartImage x="9" y="8" width="17" height="17">
+                <PartImage x="9" y="9" width="22" height="22">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
-                <PartImage x="9" y="8" width="17" height="17" tintColor="#4DD0E1">
+                <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 
-                <PartText x="30" y="6" width="158" height="22">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="22" color="#EEF3EC">
+                <PartText x="35" y="8" width="197" height="25">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="25" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
             </Complication>
             <Complication type="SHORT_TEXT">
-                <PartImage x="9" y="8" width="17" height="17">
+                <PartImage x="9" y="9" width="22" height="22">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
-                <PartImage x="9" y="8" width="17" height="17" tintColor="#4DD0E1">
+                <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 
-                <PartText x="30" y="6" width="158" height="22">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="22" color="#EEF3EC">
+                <PartText x="35" y="8" width="197" height="25">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="25" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartImage x="9" y="8" width="17" height="17">
+                <PartImage x="9" y="9" width="22" height="22">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
-                <PartImage x="9" y="8" width="17" height="17" tintColor="#4DD0E1">
+                <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 
-                <PartText x="30" y="6" width="158" height="22">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="22" color="#EEF3EC">
+                <PartText x="35" y="8" width="197" height="25">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="25" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartDraw x="30" y="28" width="158" height="2">
-                    <Rectangle x="0" y="0" width="158" height="2"><Fill color="#1D2226" /></Rectangle>
-                    <Rectangle x="0" y="0" width="158" height="2">
-                        <Transform target="width" value="clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0, 1) * 158" />
+                <PartDraw x="35" y="35" width="197" height="2">
+                    <Rectangle x="0" y="0" width="197" height="2"><Fill color="#1D2226" /></Rectangle>
+                    <Rectangle x="0" y="0" width="197" height="2">
+                        <Transform target="width" value="clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / ([COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0, 1) * 197" />
                         <Fill color="#FFE082" />
                     </Rectangle>
                 </PartDraw>
             </Complication>
             <Complication type="SMALL_IMAGE">
-                <PartImage x="84" y="4" width="26" height="26">
+                <PartImage x="102" y="4" width="33" height="33">
                     <Image resource="[COMPLICATION.SMALL_IMAGE]" />
                 </PartImage>
             </Complication>
             <Complication type="MONOCHROMATIC_IMAGE">
-                <PartImage x="85" y="5" width="24" height="24" tintColor="#EEF3EC">
+                <PartImage x="103" y="5" width="31" height="31" tintColor="#EEF3EC">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
             </Complication>

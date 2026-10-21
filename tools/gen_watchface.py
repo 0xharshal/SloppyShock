@@ -96,7 +96,7 @@ def box(x, y, w, h):
 # Lower area, design space: column edges 74..222 and 228..376, rows A/B/C.
 ROW_A = (222, 32)
 ROW_B = (262, 44)
-ROW_C = (314, 32)
+ROW_C = (314, 38)
 COL_L, COL_R = (74, 148), (228, 148)
 
 # Lit ring angle: whole segments only (60 segments, 6 degrees each).
@@ -119,16 +119,16 @@ SLOTS_COMPACT = [
     (6, box(*COL_R[:1], ROW_A[0], COL_R[1], ROW_A[1]), "WATCH_BATTERY", "SHORT_TEXT", "short"),
     (0, box(*COL_L[:1], ROW_B[0], COL_L[1], ROW_B[1]), "STEP_COUNT", "SHORT_TEXT", "short"),
     (1, box(*COL_R[:1], ROW_B[0], COL_R[1], ROW_B[1]), "WORLD_CLOCK", "SHORT_TEXT", "short"),
-    (4, box(135, ROW_C[0], 180, ROW_C[1]), "NEXT_EVENT", "LONG_TEXT", "long"),
+    (4, box(115, ROW_C[0], 220, ROW_C[1]), "NEXT_EVENT", "LONG_TEXT", "long"),
 ]
 
 # Detailed dial: one large panel over rows A+B (calendar, weather, …) and one
 # small slot at the bottom.
 # Detail layouts: the panels fill rows A+B and reach down to PANEL_BOTTOM; the
 # single small slot sits lower (ROW_C_LOW) than in the compact layout.
-ROW_C_LOW = (324, 32)
+ROW_C_LOW = (324, 38)
 PANEL_TOP, PANEL_BOTTOM = ROW_A[0], ROW_C_LOW[0] - 8
-BOTTOM_SLOT = (4, box(135, ROW_C_LOW[0], 180, ROW_C_LOW[1]), "STEP_COUNT", "SHORT_TEXT", "long")
+BOTTOM_SLOT = (4, box(115, ROW_C_LOW[0], 220, ROW_C_LOW[1]), "STEP_COUNT", "SHORT_TEXT", "long")
 
 SLOTS_DETAILED = [
     (10, box(COL_L[0], PANEL_TOP, COL_R[0] + COL_R[1] - COL_L[0], PANEL_BOTTOM - PANEL_TOP),
@@ -330,12 +330,13 @@ def complication_slot(slot_id, rect, provider, ptype, kind):
     half = large and w <= sz(200)
     tall = large or h >= sz(40)
     pad = sz(8 if large else 8)
-    icon_s = sz(20 if large else 18 if tall else 16)
+    wide = kind == "long"          # the bottom slot: one big line
+    icon_s = sz(20 if large or wide else 18 if tall else 16)
     # half panel: 14 chars ("MEDIA CONTROLS"); full panel: ~23 chars
     # Panel titles carry key values (e.g. the weather temperature): same size as the value.
     title_size = sz(21 if half else 23) if large else sz(10)
     # Panel values: large enough to read; wrap onto a second line when longer.
-    text_size = sz(21 if half else 23) if large else sz(22 if tall else 20)
+    text_size = sz(21 if half else 23) if large else sz(23 if wide else 22 if tall else 20)
     text_lines = 2 if large else 1
     if large:
         icon_x, icon_y = pad, sz(8)
