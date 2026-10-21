@@ -1075,12 +1075,12 @@
                 <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
-                <PartText x="36" y="11" width="115" height="20">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="18" color="#FFE082">
+                <PartText x="36" y="8" width="115" height="25">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="23" color="#FFE082">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="37" width="142" height="60">
+                <PartText x="9" y="36" width="142" height="60">
                     <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="23" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
@@ -1098,12 +1098,12 @@
                 <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
-                <PartText x="36" y="11" width="115" height="20">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="18" color="#FFE082">
+                <PartText x="36" y="8" width="115" height="25">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="23" color="#FFE082">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="37" width="142" height="60">
+                <PartText x="9" y="36" width="142" height="60">
                     <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="23" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
@@ -1116,12 +1116,12 @@
                 <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
-                <PartText x="36" y="11" width="115" height="20">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="18" color="#FFE082">
+                <PartText x="36" y="8" width="115" height="25">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="23" color="#FFE082">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="37" width="142" height="60">
+                <PartText x="9" y="36" width="142" height="60">
                     <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="23" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
@@ -1156,12 +1156,12 @@
                 <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
-                <PartText x="36" y="11" width="115" height="20">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="18" color="#FFE082">
+                <PartText x="36" y="8" width="115" height="25">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="23" color="#FFE082">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="37" width="142" height="60">
+                <PartText x="9" y="36" width="142" height="60">
                     <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="23" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
@@ -1179,12 +1179,12 @@
                 <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
-                <PartText x="36" y="11" width="115" height="20">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="18" color="#FFE082">
+                <PartText x="36" y="8" width="115" height="25">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="23" color="#FFE082">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="37" width="142" height="60">
+                <PartText x="9" y="36" width="142" height="60">
                     <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="23" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
@@ -1197,12 +1197,12 @@
                 <PartImage x="9" y="9" width="22" height="22" tintColor="#4DD0E1">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
-                <PartText x="36" y="11" width="115" height="20">
-                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="18" color="#FFE082">
+                <PartText x="36" y="8" width="115" height="25">
+                    <Text align="START" ellipsis="TRUE"><Font family="lcd_segments_narrow" size="23" color="#FFE082">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="37" width="142" height="60">
+                <PartText x="9" y="36" width="142" height="60">
                     <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="23" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>

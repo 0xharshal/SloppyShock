@@ -332,13 +332,15 @@ def complication_slot(slot_id, rect, provider, ptype, kind):
     pad = sz(8 if large else 8)
     icon_s = sz(20 if large else 18 if tall else 16)
     # half panel: 14 chars ("MEDIA CONTROLS"); full panel: ~23 chars
-    title_size = sz(17 if half else 19) if large else sz(10)
+    # Panel titles carry key values (e.g. the weather temperature): same size as the value.
+    title_size = sz(21 if half else 23) if large else sz(10)
     # Panel values: large enough to read; wrap onto a second line when longer.
     text_size = sz(21 if half else 23) if large else sz(22 if tall else 20)
     text_lines = 2 if large else 1
     if large:
         icon_x, icon_y = pad, sz(8)
-        title_x, title_y = pad + icon_s + sz(5), icon_y + (icon_s - title_size) // 2
+        title_x, title_y = pad + icon_s + sz(5), icon_y + min(0, (icon_s - title_size) // 2)
+        title_row = max(icon_s, title_size)
         text_x = pad
         text_y = icon_y + icon_s + (h - icon_y - icon_s - text_size) // 2 - sz(3)
     else:
@@ -367,7 +369,7 @@ def complication_slot(slot_id, rect, provider, ptype, kind):
     # The font's line height exceeds its size: give wrapped text 1.3 lines each.
     text_box_h = text_size if text_lines == 1 else round(text_lines * text_size * 1.3)
     if text_lines > 1:
-        text_y = icon_y + icon_s + sz(6)   # directly under the title, like a card
+        text_y = icon_y + title_row + sz(4)   # directly under the title, like a card
     text = f'''<PartText x="{text_x}" y="{text_y}" width="{text_w}" height="{text_box_h}">
                     <Text align="START"{clip}><Font family="lcd_segments_narrow" size="{text_size}" color="{LCD}">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
