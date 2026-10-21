@@ -49,7 +49,37 @@ adb shell am broadcast -a com.google.android.wearable.app.DEBUG_SURFACE \
   --es operation set-watchface --es watchFaceId com.example.sloppyshock
 ```
 
-Release builds need a signing config (not included).
+## Releases (GitHub Actions)
+
+Pushing a tag `vX.Y.Z` runs `.github/workflows/release.yml`: it builds signed
+release APKs of all three faces (versionName `X.Y.Z`, versionCode from the run
+number) and publishes them as a GitHub Release:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+One-time setup: create a release keystore (keep it and its passwords safe:
+every future release must be signed with the same key, or updates won't install)
+
+```bash
+keytool -genkeypair -keystore sloppyshock-release.jks -alias sloppyshock \
+  -keyalg RSA -keysize 4096 -validity 10000
+```
+
+and add these repository secrets (Settings → Secrets and variables → Actions):
+
+| Secret | Value |
+|---|---|
+| `SIGNING_KEYSTORE_BASE64` | output of `base64 -w0 sloppyshock-release.jks` |
+| `SIGNING_STORE_PASSWORD` | keystore password |
+| `SIGNING_KEY_ALIAS` | `sloppyshock` |
+| `SIGNING_KEY_PASSWORD` | key password |
+
+Local signed release build: set the same names as environment variables, with
+`SIGNING_KEYSTORE` pointing at the `.jks` file, and run
+`./gradlew :watchface:assembleRelease`. Without them release APKs are unsigned.
 
 ## Project structure
 

@@ -2,6 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
 }
 
+// Release signing comes from the environment (set by CI from repository
+// secrets); without it release APKs are left unsigned.
+val signingKeystore: String? = System.getenv("SIGNING_KEYSTORE")
+
 android {
     namespace = "com.example.sloppyshock"
     compileSdk {
@@ -12,8 +16,9 @@ android {
         applicationId = "com.example.sloppyshock"
         minSdk = 35
         targetSdk = 37
-        versionCode = 3
-        versionName = "1.0"
+        // CI passes -PversionCode / -PversionName derived from the run and tag.
+        versionCode = (findProperty("versionCode") as String?)?.toInt() ?: 3
+        versionName = (findProperty("versionName") as String?) ?: "1.0"
 
     }
 
@@ -34,11 +39,26 @@ android {
         }
     }
 
+    signingConfigs {
+        if (signingKeystore != null) {
+            create("release") {
+                storeFile = file(signingKeystore)
+                storePassword = System.getenv("SIGNING_STORE_PASSWORD")
+                keyAlias = System.getenv("SIGNING_KEY_ALIAS")
+                keyPassword = System.getenv("SIGNING_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
+            if (signingKeystore != null) {
+                signingConfig = signingConfigs.getByName("release")
+            }
+            // No code to optimize, and resource shrinking would strip the face:
+            // watchface.xml references fonts/drawables by name only.
             optimization {
-                enable = true
-                packageScope = setOf("androidx.**", "kotlin.**", "kotlinx.**")
+                enable = false
             }
         }
     }

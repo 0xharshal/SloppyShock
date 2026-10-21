@@ -15,6 +15,13 @@ See README.md for build commands and layout.
   claiming something works there.
 - Bump `versionCode` in `watchface/build.gradle.kts` when resources change and
   the watch shows stale content.
+- Keep release `optimization` disabled: resource shrinking strips
+  `watchface.xml`, the font and the digit PNGs (they are referenced by name
+  only), leaving an empty face. Check `unzip -l` of a release APK after build
+  config changes.
+- Releases: `.github/workflows/release.yml` builds signed APKs for `v*` tags;
+  signing comes from `SIGNING_*` env vars / repository secrets (never commit a
+  keystore).
 
 ## Samsung / WFF runtime pitfalls (Galaxy Watch4, Wear OS 6)
 

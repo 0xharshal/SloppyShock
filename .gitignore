@@ -16,3 +16,5 @@ local.properties
 __pycache__/
 /.idea/deploymentTargetSelector.xml
 /.idea/deviceManager.xml
+*.jks
+*.keystore
