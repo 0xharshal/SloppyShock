@@ -1076,8 +1076,8 @@
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="44" width="308" height="40">
-                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="18" color="#EEF3EC">
+                <PartText x="9" y="37" width="308" height="65">
+                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="25" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -1096,8 +1096,8 @@
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="44" width="308" height="40">
-                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="18" color="#EEF3EC">
+                <PartText x="9" y="37" width="308" height="65">
+                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="25" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -1111,8 +1111,8 @@
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="44" width="308" height="40">
-                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="18" color="#EEF3EC">
+                <PartText x="9" y="37" width="308" height="65">
+                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="25" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>

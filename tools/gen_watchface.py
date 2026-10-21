@@ -333,7 +333,8 @@ def complication_slot(slot_id, rect, provider, ptype, kind):
     icon_s = sz(20 if large else 18 if tall else 16)
     # half panel: 14 chars ("MEDIA CONTROLS"); full panel: ~23 chars
     title_size = sz(17 if half else 19) if large else sz(10)
-    text_size = sz(15 if half else 17) if large else sz(22 if tall else 20)
+    # Panel values: large enough to read; wrap onto a second line when longer.
+    text_size = sz(21 if half else 23) if large else sz(22 if tall else 20)
     text_lines = 2 if large else 1
     if large:
         icon_x, icon_y = pad, sz(8)
@@ -358,10 +359,11 @@ def complication_slot(slot_id, rect, provider, ptype, kind):
                     </Font></Text>
                 </PartText>''' if tall else ""
     clip = ' maxLines="2"' if text_lines > 1 else ' ellipsis="TRUE"'
-    line_gap = sz(4)
+    # The font's line height exceeds its size: give wrapped text 1.3 lines each.
+    text_box_h = text_size if text_lines == 1 else round(text_lines * text_size * 1.3)
     if text_lines > 1:
-        text_y = icon_y + icon_s + (h - icon_y - icon_s - 2 * text_size - line_gap) // 2 - sz(2)
-    text = f'''<PartText x="{text_x}" y="{text_y}" width="{text_w}" height="{text_lines * text_size + (text_lines - 1) * line_gap}">
+        text_y = icon_y + icon_s + sz(6)   # directly under the title, like a card
+    text = f'''<PartText x="{text_x}" y="{text_y}" width="{text_w}" height="{text_box_h}">
                     <Text align="START"{clip}><Font family="lcd_segments_narrow" size="{text_size}" color="{LCD}">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>

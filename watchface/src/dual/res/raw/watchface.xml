@@ -1077,8 +1077,8 @@
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="46" width="142" height="36">
-                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="16" color="#EEF3EC">
+                <PartText x="9" y="37" width="142" height="60">
+                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="23" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -1097,8 +1097,8 @@
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="46" width="142" height="36">
-                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="16" color="#EEF3EC">
+                <PartText x="9" y="37" width="142" height="60">
+                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="23" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -1112,8 +1112,8 @@
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="46" width="142" height="36">
-                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="16" color="#EEF3EC">
+                <PartText x="9" y="37" width="142" height="60">
+                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="23" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -1149,8 +1149,8 @@
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="46" width="142" height="36">
-                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="16" color="#EEF3EC">
+                <PartText x="9" y="37" width="142" height="60">
+                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="23" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -1169,8 +1169,8 @@
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="46" width="142" height="36">
-                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="16" color="#EEF3EC">
+                <PartText x="9" y="37" width="142" height="60">
+                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="23" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -1184,8 +1184,8 @@
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
-                <PartText x="9" y="46" width="142" height="36">
-                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="16" color="#EEF3EC">
+                <PartText x="9" y="37" width="142" height="60">
+                    <Text align="START" maxLines="2"><Font family="lcd_segments_narrow" size="23" color="#EEF3EC">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>
                 </PartText>
