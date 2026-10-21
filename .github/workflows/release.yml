@@ -1,11 +1,10 @@
-# Builds signed release APKs of all watch faces for a version tag (v*) and
-# publishes them as a GitHub Release.
+# Builds the signed SloppyShock watch app (all faces bundled) for a version tag
+# (v*) and publishes it as a GitHub Release.
 #
-# Required repository secrets:
-#   SIGNING_KEYSTORE_BASE64   base64 of the release keystore (.jks)
-#   SIGNING_STORE_PASSWORD    keystore password
-#   SIGNING_KEY_ALIAS         key alias
-#   SIGNING_KEY_PASSWORD      key password
+# Required repository secrets (Watch Face Push wants faces signed with a key
+# different from the app's):
+#   SIGNING_KEYSTORE_BASE64, SIGNING_STORE_PASSWORD, SIGNING_KEY_ALIAS, SIGNING_KEY_PASSWORD
+#   FACE_SIGNING_KEYSTORE_BASE64, FACE_SIGNING_STORE_PASSWORD, FACE_SIGNING_KEY_ALIAS, FACE_SIGNING_KEY_PASSWORD
 name: Release
 
 on:
@@ -33,30 +32,34 @@ jobs:
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "platforms;android-37.0"
 
-      - name: Decode signing keystore
+      - name: Decode signing keystores
         env:
           SIGNING_KEYSTORE_BASE64: ${{ secrets.SIGNING_KEYSTORE_BASE64 }}
+          FACE_SIGNING_KEYSTORE_BASE64: ${{ secrets.FACE_SIGNING_KEYSTORE_BASE64 }}
         run: |
-          if [ -z "$SIGNING_KEYSTORE_BASE64" ]; then
-            echo "::error::Secret SIGNING_KEYSTORE_BASE64 is not set"; exit 1
+          if [ -z "$SIGNING_KEYSTORE_BASE64" ] || [ -z "$FACE_SIGNING_KEYSTORE_BASE64" ]; then
+            echo "::error::Signing secrets are not set"; exit 1
           fi
-          echo "$SIGNING_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.jks"
+          echo "$SIGNING_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/app.jks"
+          echo "$FACE_SIGNING_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/faces.jks"
 
-      - name: Build release APKs
+      - name: Build release APK
         env:
-          SIGNING_KEYSTORE: ${{ runner.temp }}/release.jks
+          SIGNING_KEYSTORE: ${{ runner.temp }}/app.jks
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          FACE_SIGNING_KEYSTORE: ${{ runner.temp }}/faces.jks
+          FACE_SIGNING_STORE_PASSWORD: ${{ secrets.FACE_SIGNING_STORE_PASSWORD }}
+          FACE_SIGNING_KEY_ALIAS: ${{ secrets.FACE_SIGNING_KEY_ALIAS }}
+          FACE_SIGNING_KEY_PASSWORD: ${{ secrets.FACE_SIGNING_KEY_PASSWORD }}
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
           # versionCode must grow with every release; offset keeps it above local builds.
-          ./gradlew :watchface:assembleRelease \
+          ./gradlew :app:assembleRelease \
             -PversionName="$VERSION" -PversionCode=$((GITHUB_RUN_NUMBER + 100))
           mkdir dist
-          cp watchface/build/outputs/apk/compact/release/watchface-compact-release.apk   "dist/SloppyShock-$VERSION.apk"
-          cp watchface/build/outputs/apk/detailed/release/watchface-detailed-release.apk "dist/SloppyShock-Detailed-$VERSION.apk"
-          cp watchface/build/outputs/apk/dual/release/watchface-dual-release.apk         "dist/SloppyShock-Dual-$VERSION.apk"
+          cp app/build/outputs/apk/release/app-release.apk "dist/SloppyShock-$VERSION.apk"
 
       - uses: softprops/action-gh-release@v2
         with:

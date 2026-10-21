@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Round negative-LCD dial: segmented ring around a 7-segment "8". -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <path android:fillColor="#000000" android:pathData="M24,0a24,24 0,1 1,0 48a24,24 0,1 1,0 -48z" />
+    <path android:fillColor="#121417" android:pathData="M24,6a18,18 0,1 1,0 36a18,18 0,1 1,0 -36z" />
+    <path android:strokeColor="#EEF3EC" android:strokeWidth="2.5"
+        android:pathData="M24,2.5a21.5,21.5 0,1 1,0 43a21.5,21.5 0,1 1,0 -43z" />
+    <path android:fillColor="#FFE082" android:pathData="M22.5,1h3v4h-3z" />
+    <!-- segments of an "8", slanted -->
+    <path android:fillColor="#EEF3EC" android:pathData="M19.5,13h9l-1,2h-8.5z M18.8,23h9.4l-1,2h-9.4z M17.8,33h9.4l-1,2h-9.4z" />
+    <path android:fillColor="#EEF3EC" android:pathData="M18.5,15.5l1.5,0l-0.9,7l-1.6,0z M28.2,15.5l1.5,0l-0.9,7l-1.6,0z M17.4,25.5l1.5,0l-0.9,7l-1.6,0z M27.1,25.5l1.5,0l-0.9,7l-1.6,0z" />
+</vector>

@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "sloppyshock"
 include(":watchface")
+include(":app")
