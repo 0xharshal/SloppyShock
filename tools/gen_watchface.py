@@ -320,42 +320,48 @@ def ring_options():
 def complication_slot(slot_id, rect, provider, ptype, kind):
     """A rounded LCD sub-window.
     short/long: tall slots show title above value, compact ones icon + value.
-    large: a detail panel - icon + title on top, a full-width value line below,
-    progress bar for ranged values, and full-size images. Values use the
-    segment font."""
+    large: a detail panel - icon + title (segment font, accent colour) on top,
+    a full-width value line below, progress bar for ranged values, full-size
+    images. All text uses the narrow segment font (fits ~40% more chars).
+    Panel values wrap onto two lines (maxLines="2"; wrapping only works
+    without ellipsis); single-line slot text ends in an ellipsis."""
     x, y, w, h = rect
     large = kind == "large"
+    half = large and w <= sz(200)
     tall = large or h >= sz(40)
-    pad = sz(10 if large else 8)
-    icon_s = sz(22 if large else 18 if tall else 16)
-    title_size = sz(13 if large else 10)
-    # Large panel: one line, small enough for ~20 chars ("11:00: COFFEE CHAT").
-    # (maxLines="2" is accepted but doesn't wrap on the Galaxy runtime.)
-    # Complication text uses the narrow segment font (fits ~40% more chars).
-    text_size = sz((22 if w > sz(200) else 20) if large else 22 if tall else 20)
+    pad = sz(8 if large else 8)
+    icon_s = sz(20 if large else 18 if tall else 16)
+    # half panel: 14 chars ("MEDIA CONTROLS"); full panel: ~23 chars
+    title_size = sz(17 if half else 19) if large else sz(10)
+    text_size = sz(15 if half else 17) if large else sz(22 if tall else 20)
+    text_lines = 2 if large else 1
     if large:
-        # icon + title row, then the value on up to two full-width lines
-        icon_x, icon_y = pad, sz(7)
-        title_x, title_y = pad + icon_s + sz(6), icon_y + (icon_s - title_size) // 2 - sz(2)
+        icon_x, icon_y = pad, sz(8)
+        title_x, title_y = pad + icon_s + sz(5), icon_y + (icon_s - title_size) // 2
         text_x = pad
-        text_y = icon_y + icon_s + (h - icon_y - icon_s - text_size) // 2 - sz(2)
+        text_y = icon_y + icon_s + (h - icon_y - icon_s - text_size) // 2 - sz(3)
     else:
         text_x = pad + icon_s + sz(4)
         text_y = sz(16) if tall else (h - text_size) // 2
         icon_x, icon_y = pad, text_y + (text_size - icon_s) // 2
         title_x, title_y = text_x, sz(3)
-    text_w = w - text_x - sz(6)
-    title_w = w - title_x - sz(6)
+    text_w = w - text_x - (pad if large else sz(6))
+    title_w = w - title_x - (pad if large else sz(6))
     icon = f'''<PartImage x="{icon_x}" y="{icon_y}" width="{icon_s}" height="{icon_s}" tintColor="{LABEL}">
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>'''
+    title_font = (f'<Font family="lcd_segments_narrow" size="{title_size}" color="{ACCENT}">' if large else
+                  f'<Font family="SYNC_TO_DEVICE" size="{title_size}" color="{LABEL}" weight="BOLD">')
     title = f'''<PartText x="{title_x}" y="{title_y}" width="{title_w}" height="{title_size + sz(2)}">
-                    <Text align="START"><Font family="SYNC_TO_DEVICE" size="{title_size}" color="{LABEL}" weight="BOLD">
+                    <Text align="START" ellipsis="TRUE">{title_font}
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>''' if tall else ""
-    clip = ' ellipsis="TRUE"'
-    text = f'''<PartText x="{text_x}" y="{text_y}" width="{text_w}" height="{text_size}">
+    clip = ' maxLines="2"' if text_lines > 1 else ' ellipsis="TRUE"'
+    line_gap = sz(4)
+    if text_lines > 1:
+        text_y = icon_y + icon_s + (h - icon_y - icon_s - 2 * text_size - line_gap) // 2 - sz(2)
+    text = f'''<PartText x="{text_x}" y="{text_y}" width="{text_w}" height="{text_lines * text_size + (text_lines - 1) * line_gap}">
                     <Text align="START"{clip}><Font family="lcd_segments_narrow" size="{text_size}" color="{LCD}">
                         <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
                     </Font></Text>

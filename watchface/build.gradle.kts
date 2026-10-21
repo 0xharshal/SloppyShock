@@ -22,7 +22,7 @@ android {
         minSdk = 35
         targetSdk = 37
         // CI passes -PversionCode / -PversionName derived from the run and tag.
-        versionCode = (findProperty("versionCode") as String?)?.toInt() ?: 3
+        versionCode = (findProperty("versionCode") as String?)?.toInt() ?: 7
         versionName = (findProperty("versionName") as String?) ?: "1.0"
 
     }

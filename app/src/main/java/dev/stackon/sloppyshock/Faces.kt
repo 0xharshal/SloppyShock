@@ -119,6 +119,9 @@ class Faces(private val context: Context) {
     suspend fun use(face: BundledFace, canActivate: Boolean): UseResult {
         val current = overview()
         val state = current.faces.first { it.face.packageName == face.packageName }
+        // A face replaced or updated in the active slot stays on screen, but
+        // isWatchFaceActive() may not say so yet; don't spend an activation on it.
+        var wasActive = state.active
         val slotId = when {
             state.installed && !state.updateAvailable -> state.slotId!!
             state.installed -> fd(face) { push.updateWatchFace(state.slotId!!, it, face.token) }.slotId
@@ -128,10 +131,11 @@ class Faces(private val context: Context) {
                 val replaced = current.faces.filter { it.installed }
                     .minByOrNull { if (it.active) 1 else 0 }
                     ?: return UseResult("No free watch face slot. Remove a face installed by another app.")
+                wasActive = replaced.active
                 fd(face) { push.updateWatchFace(replaced.slotId!!, it, face.token) }.slotId
             }
         }
-        if (push.isWatchFaceActive(face.packageName)) {
+        if (wasActive || push.isWatchFaceActive(face.packageName)) {
             // Updated in place or already active: activating again would only
             // use up one of the limited setWatchFaceAsActive attempts.
             return UseResult("${face.label} is your watch face.")

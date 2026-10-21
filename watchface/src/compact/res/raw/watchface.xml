@@ -879,7 +879,7 @@
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 <PartText x="32" y="3" width="122" height="13">
-                    <Text align="START"><Font family="SYNC_TO_DEVICE" size="11" color="#4DD0E1" weight="BOLD">
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="11" color="#4DD0E1" weight="BOLD">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -894,7 +894,7 @@
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 <PartText x="32" y="3" width="122" height="13">
-                    <Text align="START"><Font family="SYNC_TO_DEVICE" size="11" color="#4DD0E1" weight="BOLD">
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="11" color="#4DD0E1" weight="BOLD">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -931,7 +931,7 @@
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 <PartText x="32" y="3" width="122" height="13">
-                    <Text align="START"><Font family="SYNC_TO_DEVICE" size="11" color="#4DD0E1" weight="BOLD">
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="11" color="#4DD0E1" weight="BOLD">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>
@@ -946,7 +946,7 @@
                     <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
                 </PartImage>
                 <PartText x="32" y="3" width="122" height="13">
-                    <Text align="START"><Font family="SYNC_TO_DEVICE" size="11" color="#4DD0E1" weight="BOLD">
+                    <Text align="START" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="11" color="#4DD0E1" weight="BOLD">
                         <Template>%s<Parameter expression="[COMPLICATION.TITLE]" /></Template>
                     </Font></Text>
                 </PartText>

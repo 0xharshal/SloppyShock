@@ -65,7 +65,10 @@ See README.md for build commands and layout.
 - Samsung clips a complication's drawing to its bounds. `BoundingArc` clips the
   ring away entirely, so ring slots use a full-screen `BoundingBox`. Smaller
   slots drawn later still get their own taps.
-- `Text maxLines="2"` is accepted but does not wrap; `ellipsis="TRUE"` works.
+- `Text maxLines="2"` wraps at word boundaries only **without** `ellipsis`;
+  with `ellipsis="TRUE"` the text stays on one line and is truncated.
+- Updating a pushed face changes nothing visible unless its `versionCode`
+  is higher (the app compares versions); bump it when testing face changes.
 - An empty `<ListOption/>` / `<Complication/>` may break parsing; the generator
   always puts a 1px transparent `PartDraw` in them.
 - New slots on an existing install get no default provider; test defaults
