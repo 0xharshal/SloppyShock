@@ -12,6 +12,8 @@ import androidx.wear.watchfacepush.WatchFacePushManager.SetWatchFaceAsActiveExce
 import androidx.wear.watchfacepush.WatchFacePushManagerFactory
 import java.io.File
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 
 /** A watch face APK shipped in this app's assets, with its validation token. */
@@ -47,14 +49,19 @@ class Faces(private val context: Context) {
         WatchFacePushManagerFactory.createWatchFacePushManager(context)
 
     private var bundled: List<BundledFace>? = null
+    private val loading = Mutex()
 
-    /** Faces in the assets (default face first). APKs are copied to the cache once. */
-    suspend fun bundled(): List<BundledFace> =
+    /**
+     * Faces in the assets (default face first). APKs are copied to the cache
+     * once; the lock keeps concurrent callers from reading a half-copied APK.
+     */
+    suspend fun bundled(): List<BundledFace> = loading.withLock {
         bundled ?: withContext(Dispatchers.IO) {
             val assets = context.assets.list("").orEmpty().filter { it.endsWith(".apk") }
             assets.sortedBy { if (it == "default_watchface.apk") "" else it }
                 .mapNotNull { loadBundled(it) }
         }.also { bundled = it }
+    }
 
     private fun loadBundled(asset: String): BundledFace? {
         val apk = File(context.cacheDir, asset)
@@ -124,6 +131,11 @@ class Faces(private val context: Context) {
                 fd(face) { push.updateWatchFace(replaced.slotId!!, it, face.token) }.slotId
             }
         }
+        if (push.isWatchFaceActive(face.packageName)) {
+            // Updated in place or already active: activating again would only
+            // use up one of the limited setWatchFaceAsActive attempts.
+            return UseResult("${face.label} is your watch face.")
+        }
         if (!canActivate) {
             return UseResult("${face.label} installed. Select it in the watch face list.")
         }
@@ -131,7 +143,13 @@ class Faces(private val context: Context) {
             push.setWatchFaceAsActive(slotId)
             UseResult("${face.label} is now your watch face.")
         } catch (e: SetWatchFaceAsActiveException) {
-            UseResult("${face.label} installed. Select it in the watch face list.")
+            Log.w(TAG, "setWatchFaceAsActive failed: errorCode=${e.errorCode}", e)
+            val why = if (e.errorCode == SetWatchFaceAsActiveException.ERROR_MAXIMUM_ATTEMPTS_REACHED) {
+                "Wear OS limits how often an app may switch the watch face. "
+            } else {
+                ""
+            }
+            UseResult("${face.label} installed. ${why}Select it in the watch face list.")
         }
     }
 
