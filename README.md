@@ -1,53 +1,104 @@
 # SloppyShock
 
-Negative-LCD digital watch faces for Wear OS, written in
-[Watch Face Format](https://developer.android.com/training/wearables/wff) (WFF v2).
-No app code: each face is declarative XML plus resources.
+> **This project is AI-assisted.** Most of the code, the watch faces and this
+> documentation were written with Claude (Anthropic) under human direction and
+> tested on real hardware.
 
-Three faces are built from one project, each its own APK:
+Negative-LCD digital watch faces for Wear OS: segment-display digits with unlit
+"ghost" segments, a 60-segment ring and lots of complications. Written in
+[Watch Face Format](https://developer.android.com/training/wearables/wff), no
+code in the faces.
 
-| Face | Package | Layout |
-|---|---|---|
-| SloppyShock | `com.example.sloppyshock` | four small complications + one wide one |
-| SloppyShock Detailed | `com.example.sloppyshock.detailed` | one large detail panel + one small slot |
-| SloppyShock Dual | `com.example.sloppyshock.dual` | two detail panels side by side + one small slot |
+| SloppyShock | SloppyShock Detailed | SloppyShock Dual |
+|:---:|:---:|:---:|
+| ![SloppyShock](watchface/src/compact/res/drawable/preview.png) | ![SloppyShock Detailed](watchface/src/detailed/res/drawable/preview.png) | ![SloppyShock Dual](watchface/src/dual/res/drawable/preview.png) |
+| five small complications | one large detail panel | two detail panels |
 
-All faces share: 7/14-segment digits with unlit "ghost" segments, day/date,
-time with AM/PM and seconds, a 60-segment ring driven by a complication
-(battery by default) or by seconds, a yellow ring marker complication, and
-invisible tap areas over the time and date that open a provider/app of your
-choice. Always-on mode is built to qualify for low-power display offload.
+All three have day/date, time with AM/PM and seconds, a ring that shows a
+complication (battery by default) or the seconds, invisible tap areas on the
+time and date that open an app of your choice, and a low-power always-on mode.
 
-## Requirements
+The faces are installed by the **SloppyShock app** on the watch, which carries
+all three and switches between them (Wear OS 6
+[Watch Face Push](https://developer.android.com/training/wearables/watch-face-push)):
 
-- Android SDK with platform 37 (`local.properties` → `sdk.dir`)
-- JDK 25 (Gradle toolchain), Gradle wrapper included
-- Python 3 with `fontTools` and `Pillow` (only to regenerate sources)
-- A Wear OS 5+ device or emulator (`minSdk 35`)
+<img src="docs/watch-app.png" alt="SloppyShock watch app" width="240">
 
-## Build and install
+**Tested on a Samsung Galaxy Watch4 Classic** (Wear OS 6). It should also work
+on other round Wear OS 6 watches; square screens are not supported.
+
+## Install on your watch
+
+You need one file, `SloppyShock-<version>.apk` (the watch app), and a watch
+running **Wear OS 6**. Watch apps can't be installed by tapping the APK, so it
+goes over the watch's wireless debugging, either from your phone or from a PC.
+
+**1. Enable wireless debugging on the watch (once)**
+
+1. Settings → About watch → Software information → tap **Software version**
+   (Galaxy) or **Build number** (other watches) about 7 times until developer
+   options are enabled.
+2. Settings → Developer options → enable **ADB debugging** and
+   **Wireless debugging** (watch and phone/PC must be on the same Wi-Fi).
+
+**2a. Install from your phone with Wear Installer 2 (no PC)**
+
+1. Install [Wear Installer 2](https://play.google.com/store/search?q=Wear%20Installer%202&c=apps)
+   from Google Play on your phone and download `SloppyShock-<version>.apk` to the phone.
+2. On the watch open Wireless debugging → **Pair new device**; enter the shown
+   IP address, port and pairing code in Wear Installer 2 (its built-in help
+   video walks through this).
+3. Choose the downloaded APK in Wear Installer 2 and install it.
+
+**2b. Or install from a PC with adb**
 
 ```bash
-./gradlew :watchface:assembleDebug          # all three faces
-./gradlew :watchface:installAllFaces        # install all three
-./gradlew :watchface:zipFaces               # build/dist/sloppyshock-watchfaces.zip
+adb pair <watch-ip>:<pairing-port>        # IP, port and code from "Pair new device"
 ```
-
-With several devices attached (e.g. a phone), select the watch:
 
 ```bash
-ANDROID_SERIAL=<watch-serial> ./gradlew :watchface:installAllFaces
+adb connect <watch-ip>:<port>             # port shown on the Wireless debugging screen
 ```
-
-Single face: `./gradlew :watchface:installCompactDebug` (or `Detailed`, `Dual`).
-In Android Studio pick the face in **Build Variants** (`compactDebug`, …).
-
-Activate a face from the command line:
 
 ```bash
-adb shell am broadcast -a com.google.android.wearable.app.DEBUG_SURFACE \
-  --es operation set-watchface --es watchFaceId com.example.sloppyshock
+adb install SloppyShock-<version>.apk
 ```
+
+**3. Use it**
+
+- Installing the app also installs the **SloppyShock** face. Long-press the
+  watch face and pick it, or open the **SloppyShock** app and tap **Use**.
+- Switch layouts in the app (Wear OS allows one face per app, so **Use**
+  replaces the current SloppyShock face). Allow the "watch face" permission
+  when asked so the app can activate faces itself.
+- Customize as usual: long-press the face → edit. **Ring** chooses complication
+  or seconds; the complications page has all slots plus **Tap on time** /
+  **Tap on date** (pick any app shortcut).
+- You can turn wireless debugging off again afterwards.
+
+## Building
+
+Requirements: Android SDK with platform 37 (`local.properties` → `sdk.dir`),
+JDK 25 (Gradle toolchain; wrapper included), Python 3 with `fontTools` and
+`Pillow` (only to regenerate sources).
+
+```bash
+./gradlew :app:assembleDebug     # the watch app, faces bundled (app/build/outputs/apk/)
+./gradlew :app:installDebug      # install it (ANDROID_SERIAL=<watch> with several devices)
+```
+
+The build validates every face with Google's Watch Face Push validator and
+bundles it with its validation token; a face that fails validation fails the
+build.
+
+On devices without Watch Face Push (Wear OS 5, e.g. the emulator) install the
+faces directly instead: `./gradlew :watchface:installAllFaces`.
+
+Release builds need signing keys from environment variables: `SIGNING_*` for
+the app and `FACE_SIGNING_*` for the faces (Watch Face Push requires a separate
+key for faces), each with `_KEYSTORE`, `_STORE_PASSWORD`, `_KEY_ALIAS`,
+`_KEY_PASSWORD`. Tagging `v*` on GitHub runs `.github/workflows/release.yml`,
+which publishes the signed app APK.
 
 ## Project structure
 
@@ -55,35 +106,30 @@ adb shell am broadcast -a com.google.android.wearable.app.DEBUG_SURFACE \
 tools/
   gen_watchface.py       # generates every face's watchface.xml + strings.xml
   gen_segment_font.py    # generates the segment font and always-on digit PNGs
-watchface/
-  build.gradle.kts       # flavors compact/detailed/dual, installAllFaces, zipFaces
-  src/main/              # shared: manifest, watch_face_info, font, digit PNGs
-    res/font/lcd_segments.ttf          (generated)
-    res/drawable-nodpi/lcd_digit_*.png (generated)
-  src/<flavor>/res/
-    raw/watchface.xml    # the face (generated)
-    values/strings.xml   # names shown in the editor (generated)
-    drawable/preview.png # picker preview (screenshot)
+watchface/               # the faces: flavors compact/detailed/dual, one APK each
+  build.gradle.kts       # validation tasks (validate<Face><Type>), installAllFaces
+  src/main/              # shared: manifest, watch_face_info, font, digit PNGs (generated)
+  src/<flavor>/res/      # raw/watchface.xml + values/strings.xml (generated), preview.png
+app/                     # the SloppyShock watch app (Kotlin, Wear Compose)
+  build.gradle.kts       # bundles the validated faces into assets
+  src/main/java/…/Faces.kt          # Watch Face Push: list, install/switch, remove
+  src/main/java/…/MainActivity.kt   # UI
 ```
 
 ## Editing the faces
 
-The XML is generated; edit the Python generators, never the XML.
+The face XML is generated; edit the Python generators, never the XML:
 
 ```bash
 python3 tools/gen_segment_font.py   # after changing glyphs, digit size or colour
 python3 tools/gen_watchface.py      # after any layout/behaviour change
-./gradlew :watchface:assembleDebug
 ```
 
 Useful knobs in `tools/gen_watchface.py`: palette (`LCD`, `ACCENT`, `AOD_*`),
 `PANEL_R` (panel size; the layout scales with it), `SLOTS_COMPACT` /
 `SLOTS_DETAILED` / `SLOTS_DUAL` (slot positions and default providers),
-`TAP_AREAS`, `RING_MODES`. If the main time size changes, the generator stops
-and tells you which `DIGIT_PX` to set in `gen_segment_font.py`.
+`TAP_AREAS`, `RING_MODES`. A face may have at most 8 complication slots.
 
-## Customizing on the watch
+## License
 
-Long-press the face → edit. Settings: **Ring** (complication or seconds).
-Complications page: the small slots, detail panels, the ring and the ring
-marker (full-screen slots), and the **Tap on time** / **Tap on date** areas.
+[The Unlicense](LICENSE): public domain, do whatever you want.

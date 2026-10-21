@@ -1,7 +1,9 @@
 # CLAUDE.md
 
 Wear OS watch faces in Watch Face Format v2 (declarative XML, `hasCode=false`).
-Three faces (build flavors `compact`, `detailed`, `dual`) share one generator.
+Three faces (build flavors `compact`, `detailed`, `dual` of `:watchface`) share
+one generator. They ship inside the `:app` watch app (`dev.stackon.sloppyshock`,
+Kotlin + Wear Compose), which installs them with Watch Face Push (Wear OS 6).
 See README.md for build commands and layout.
 
 ## Ground rules
@@ -19,9 +21,34 @@ See README.md for build commands and layout.
   `watchface.xml`, the font and the digit PNGs (they are referenced by name
   only), leaving an empty face. Check `unzip -l` of a release APK after build
   config changes.
-- Releases: `.github/workflows/release.yml` builds signed APKs for `v*` tags;
-  signing comes from `SIGNING_*` env vars / repository secrets (never commit a
-  keystore).
+- Releases: `.github/workflows/release.yml` builds the signed app APK for `v*`
+  tags. App key from `SIGNING_*`, face key from `FACE_SIGNING_*` (Watch Face
+  Push wants a separate face key); env vars / repository secrets, never commit
+  a keystore.
+
+## Watch Face Push (`:app`)
+
+- Face packages must be `dev.stackon.sloppyshock.watchfacepush.<face>` and the
+  face APK may contain only manifest + resources: `:watchface` builds with
+  `isMinifyEnabled = true` (drops classes.dex) and `isShrinkResources = false`
+  (keeps the face). Don't change either.
+- `:watchface:validate<Face><Type>` runs Google's validator CLI
+  (`validator-push-cli`) and writes `build/watchfacepush/<variant>/<face>.apk`
+  + `<face>_token.txt`; the build fails on any failed check. `:app` copies them
+  into its assets; `compact` becomes `default_watchface.apk`, whose token goes
+  into the manifest (`DEFAULT_WATCHFACE_VALIDATION_TOKEN`) so Wear OS installs
+  it together with the app.
+- The validator enforces the WFF XSD strictly (the watches don't), e.g. at most
+  8 `ComplicationSlot`s per face; the generator checks this. To see all schema
+  errors, validate the XML against `docs.zip` inside the validator jar.
+- Samsung allows **one** pushed face per app (`remainingSlotCount` 0 after the
+  default face), so `Faces.use()` replaces the face in that slot.
+- Debug builds accept `am start -S -n dev.stackon.sloppyshock/.MainActivity
+  --es use <face>` (or `--es remove <face>`) and log the result plus the slot
+  state under tag `SloppyShock`; keep the screen awake while it runs (frozen
+  apps on Samsung don't execute).
+- Watch Face Push needs Wear OS 6 (API 36): the Wear OS 5 emulator can't run
+  `:app`; use `:watchface:installAllFaces` there.
 
 ## Samsung / WFF runtime pitfalls (Galaxy Watch4, Wear OS 6)
 
